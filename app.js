@@ -38,11 +38,12 @@ app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
 app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
 
 app.set('routes', path.join(__dirname, '/routes'));
-app.get("/", (req, res) => { res.render('api/index.js'); })
 
 // app.use('/', routes);
 app.use('/admin', adminRoutes);
-app.use('/user', userRoutes);
+app.use('/', userRoutes);
+
+// app.get("/", (req, res) => { res.redirect('user/main'); })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

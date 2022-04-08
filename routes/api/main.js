@@ -6,13 +6,15 @@ var connection = require('../../config/db').conn;
 
 //로그인 페이지
 router.get('/', async (req, res) => {
+    console.log("탔다!!")
     try {
         const sql = "select * from partners";
         connection.query(sql, (err, result) => {
             if (err) {
                 console.log("query error");
             }
-            let route = req.app.get('views') + 'ejs/userEjs/index.ejs';
+            let route = req.app.get('views') + '/ejs/userEjs/index.ejs';
+            console.log(route)
             res.render(route, {
                 result : result
             });
