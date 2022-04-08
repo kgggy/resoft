@@ -27,22 +27,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('views', path.join(__dirname, '/views'));
 // app.get("/", (req, res) => { res.render('index.html', {layout:false})  })
-app.get("/", (req, res) => {
-  try {
-    var sql = "select * from curriculum c left join file f on f.crclId = c.crclId order by crclDate";
-    connection.query(sql, (err, results) => {
-      console.log(results);
-      if (err) {
-        console.log(err);
-      }
-      res.render('userEjs/index.ejs', {
-        results: results
-      })
-    });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-})
+
 app.get("/sub01_1", (req, res) => { res.render('userEjs/sub1/sub1_1.ejs'); })
 app.get("/sub01_2", (req, res) => { res.render('userEjs/sub1/sub1_2.ejs'); })
 app.get("/sub01_3", (req, res) => { res.render('userEjs/sub1/sub1_3.ejs'); })
@@ -51,6 +36,9 @@ app.get("/sub02_1", (req, res) => { res.render('userEjs/sub2/sub2_1.ejs'); })
 app.get("/sub02_2", (req, res) => { res.render('userEjs/sub2/sub2_2.ejs'); })
 app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
 app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
+
+app.set('routes', path.join(__dirname, '/routes'));
+app.get("/", (req, res) => { res.render('api/index.js'); })
 
 // app.use('/', routes);
 app.use('/admin', adminRoutes);
