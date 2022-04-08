@@ -1,11 +1,16 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const mysql = require('mysql');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+var connection = require('./config/db.js').conn;
+
 const app = express(); //express 패키지 호출, app변수 객체 생성. => app객체에 기능 하나씩 연결.
+
+// const routes = require('./routes');
+const adminRoutes = require('./routes/admin_api');
+const userRoutes = require('./routes/api');
 
 //app.use => 미들웨어 연결
 app.use(logger('dev'));
@@ -22,7 +27,22 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('views', path.join(__dirname, '/views'));
 // app.get("/", (req, res) => { res.render('index.html', {layout:false})  })
-app.get("/", (req, res) => { res.render('userEjs/index.ejs'); })
+app.get("/", (req, res) => {
+  try {
+    var sql = "select * from curriculum c left join file f on f.crclId = c.crclId order by crclDate";
+    connection.query(sql, (err, results) => {
+      console.log(results);
+      if (err) {
+        console.log(err);
+      }
+      res.render('userEjs/index.ejs', {
+        results: results
+      })
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+})
 app.get("/sub01_1", (req, res) => { res.render('userEjs/sub1/sub1_1.ejs'); })
 app.get("/sub01_2", (req, res) => { res.render('userEjs/sub1/sub1_2.ejs'); })
 app.get("/sub01_3", (req, res) => { res.render('userEjs/sub1/sub1_3.ejs'); })
@@ -32,6 +52,9 @@ app.get("/sub02_2", (req, res) => { res.render('userEjs/sub2/sub2_2.ejs'); })
 app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
 app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
 
+// app.use('/', routes);
+app.use('/admin', adminRoutes);
+app.use('/user', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
