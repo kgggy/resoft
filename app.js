@@ -10,7 +10,7 @@ const app = express(); //express 패키지 호출, app변수 객체 생성. => a
 
 // const routes = require('./routes');
 const adminRoutes = require('./routes/admin_api');
-const userRoutes = require('./routes/api');
+const routes = require('./routes/api');
 
 //app.use => 미들웨어 연결
 app.use(logger('dev'));
@@ -37,12 +37,9 @@ app.get("/sub02_2", (req, res) => { res.render('userEjs/sub2/sub2_2.ejs'); })
 app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
 app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
 
-app.set('routes', path.join(__dirname, '/routes'));
-app.get("/", (req, res) => { res.render('api/index.js'); })
 
-// app.use('/', routes);
+app.use('/', routes);
 app.use('/admin', adminRoutes);
-app.use('/user', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

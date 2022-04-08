@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
             if (err) {
                 console.log("query error");
             }
-            let route = req.app.get('views') + 'ejs/userEjs/index.ejs';
+            let route = req.app.get('views') + '/ejs/userEjs/index.ejs';
             res.render(route, {
                 result : result
             });

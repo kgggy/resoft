@@ -6,7 +6,7 @@ var connection = require('../../config/db').conn;
 
 //로그인 페이지
 router.get('/', async (req, res) => {
-    let route = req.app.get('views') + 'ejs/admin/index.ejs';
+    let route = req.app.get('views') + '/ejs/admin/index.ejs';
     res.render(route);
 });
 
