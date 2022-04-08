@@ -1,4 +1,4 @@
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4cd6069a11e9e7879a858cca60c2cac6"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=859d5827dea74945a8d9243df81edcf3"></script>
 
 <%- include('../partials/userHeader.ejs') %>
 <style>
@@ -628,15 +628,15 @@
 	// });
 	// document.querySelectorAll('.button').forEach(button => 
 	// 	button.innerHTML = '<div><span>' + 
-	// 	button.textContent.trim().split('').join('</span><span>') + 
-	// 	'</span></div>');
+		// 	button.textContent.trim().split('').join('</span><span>') + 
+			// 	'</span></div>');
 
-
-	// 아이콘 8개
-	if (window.matchMedia("screen and (max-width: 1217px)").matches) {
-		$(function () {
-			$(".customer_list").hide();
-			var array = [];
+			
+			// 아이콘 8개
+			if (window.matchMedia("screen and (max-width: 1217px)").matches) {
+				$(function () {
+					$(".customer_list").hide();
+					var array = [];
 			var list = document.getElementsByClassName('customer_list');
 
 			for (var i = 0; i < list.length; i++) {
@@ -647,33 +647,36 @@
 			visiArray = array.slice(0, 8);
 			visiArray = visiArray.concat(array.slice(8, 16).reverse());
 			visiArray = visiArray.concat(array.slice(16, 24));
-
+			
 			var second = 0;
 			for (var i = 0; i < visiArray.length; i++) {
 				second = second + 0.1;
 				visiArray[i].setAttribute('data-wow-delay', second + 's')
 				visiArray[i].style.display = 'block';
 			}
-
-
+			
+			var load = document.getElementsByClassName('load')[0];
 			//숨겨진 아이콘
-			$(".load").click(function (e) {
+			load.addEventListener('click', function (e) {
 				e.preventDefault();
 				var hiddenArray = [];
 				hiddenArray = array.slice(24, 27);
-
+				
 				var hSecond = 0;
 				for (var i = 0; i < hiddenArray.length; i++) {
 					hSecond = hSecond + 0.1;
 					hiddenArray[i].setAttribute('data-wow-delay', hSecond + 's');
 					hiddenArray[i].style.display = 'block';
 				}
-
+				load.style.display="none";
+				
 				window.scrollTo(0, window.pageYOffset + 1);
 				window.scrollTo(0, window.pageYOffset - 1);
-				if ($(".customer_list:hidden").length == 0) {
-					$(".load").hide();
-				}
+
+				
+				// if (document.querySelectorAll('.customer_list[style="display:none;"]').length == 0) {
+				// 	load.style.display = "none";
+				// }
 			});
 		});
 	}
