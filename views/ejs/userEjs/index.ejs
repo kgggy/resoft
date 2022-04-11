@@ -92,6 +92,13 @@
 		position: absolute;
 		content: "";
 	}
+	.back.flip-item{
+		text-align: center;
+		line-height: 30px;
+	}
+	.map-wrap {
+    margin: 0 200px;
+	}
 </style>
 <script>
 	$(document).ready(function () {
@@ -334,168 +341,32 @@
 <div class="clients-img-wrap ">
 	<!-- <img src="/public/user/main/연계.png" alt=""> -->
 	<ul>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.1s">
+		<% for(var i = 0; i < 9; i++){ %>
+		<li class="wow fadeInUp customer_list" data-wow-delay="0.<%=i+1%>s">
 			<div class="img-wrap">
-				<img src="/public/user/main/대구광역시 건축사회.png" alt="">
+				<img src="<%=partnersRes[i].partnerImg%>" alt="">
 			</div>
-			<p>대구광역시 건축사회</p>
+			<p><%=partnersRes[i].partnersName%></p>
 		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.2s">
+		<%}%>
+
+		<% for(var i = 0; i < 9; i++){ %>
+		<li class="wow fadeInUp customer_list" data-wow-delay="1.<%=8-i%>s">
 			<div class="img-wrap">
-				<img src="/public/user/main/대구광역시.png" alt="">
+				<img src="<%=partnersRes[i+9].partnerImg%>" alt="">
 			</div>
-			<p>대구광역시</p>
+			<p><%=partnersRes[i+9].partnersName%></p>
 		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.3s">
+		<%}%>
+
+		<% for(var i = 0; i < 9; i++){ %>
+		<li class="wow fadeInUp customer_list" data-wow-delay="2.<%=i%>s" data-wow-offset="-30">
 			<div class="img-wrap">
-				<img src="/public/user/main/매일신문.png" alt="">
+				<img src="<%=partnersRes[i+18].partnerImg%>" alt="">
 			</div>
-			<p>매일신문</p>
+			<p><%=partnersRes[i+18].partnersName%></p>
 		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.4s">
-			<div class="img-wrap">
-				<img src="/public/user/main/경북대학교.png" alt="" class="sm-img">
-			</div>
-			<p>경북대학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.5s">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구MBC문화원.png" alt="">
-			</div>
-			<p>대구MBC문화원</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.6s">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구광역시 체육회.png" alt="">
-			</div>
-			<p>대구광역시 체육회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.7s">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구가톨릭대학교.png" alt="">
-			</div>
-			<p>대구가톨릭대학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.8s">
-			<div class="img-wrap">
-				<img src="/public/user/main/송파구청.png" alt="">
-			</div>
-			<p>송파구청</p>
-		</li>
-		<li class="wow fadeInUp customer_list" id="power" data-wow-delay="0.9s">
-			<div class="img-wrap">
-				<img src="/public/user/main/국민의힘.png" alt="">
-			</div>
-			<p>국민의 힘</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.8s">
-			<div class="img-wrap">
-				<img src="/public/user/main/국제라이온스협회.png" alt="">
-			</div>
-			<p>국제라이온스협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.7s">
-			<div class="img-wrap">
-				<img src="/public/user/main/한국전기공사협회.png" alt="">
-			</div>
-			<p>한국전기공사협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.6s">
-			<div class="img-wrap">
-				<img src="/public/user/main/즐거운세상.png" alt="" class="lg-img">
-			</div>
-			<p>(주)즐거운 세상</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.5s">
-			<div class="img-wrap">
-				<img src="/public/user/main/해양대학교.png" alt="" class="lg-img">
-			</div>
-			<p>한국해양대학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.4s">
-			<div class="img-wrap">
-				<img src="/public/user/main/국제라이온스협회.png" alt="">
-			</div>
-			<p>국제로타리클럽</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.3s">
-			<div class="img-wrap">
-				<img src="/public/user/main/상공회의소.png" alt="">
-			</div>
-			<p>대구상공회의소</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.2s">
-			<div class="img-wrap">
-				<img src="/public/user/main/대한건설협회.png" alt="">
-			</div>
-			<p>대한건설협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.1s">
-			<div class="img-wrap">
-				<img src="/public/user/main/한국청년회의소.png" alt="">
-			</div>
-			<p>한국청년회의소</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.0s">
-			<div class="img-wrap">
-				<img src="/public/user/main/계명대.png" alt="" class="lg-img-width">
-			</div>
-			<p>계명대학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.9s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/목포해양대학교.png" alt="">
-			</div>
-			<p>목포해양대학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.0s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구공고.png" alt="">
-			</div>
-			<p>대구공업고등학교</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.1s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/대경산업협회.png" alt="">
-			</div>
-			<p>대경ICT산업협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.2s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/한국조리기능장협회.png" alt="" class="lg-img-width">
-			</div>
-			<p>한국조리기능장협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.3s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/여성기업인협회.png" alt="">
-			</div>
-			<p>IT여성기업인협회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.4s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/중소기업융합연합회.png" alt="">
-			</div>
-			<p>중소기업융합연합회</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.5s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구신용보증재단.png" alt="">
-			</div>
-			<p>대구신용보증재단</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.6s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/달서구청.png" alt="">
-			</div>
-			<p>달서구청</p>
-		</li>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.7s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="/public/user/main/대구디지털산업진흥회.png" alt="">
-			</div>
-			<p>대구디지털산업진흥원</p>
-		</li>
+		<%}%>
 	</ul>
 	<button class="load"><i class="fa-solid fa-circle-plus"></i></button>
 </div>
