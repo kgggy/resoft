@@ -3,6 +3,7 @@ const router = express.Router();
 // var session = require('express-session');
 
 const login = require('./login.js');
+const main = require('./main.js');
 
 // router.use('/admin', (req,res,next) => {
 //     if(req.url == '/' || req.url == '/login') {
@@ -21,6 +22,6 @@ const login = require('./login.js');
 //     }
 // });
 router.use('/', login);
-
+router.use('/main', main);
 
 module.exports = router;
