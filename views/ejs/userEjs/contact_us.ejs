@@ -92,13 +92,6 @@
 		position: absolute;
 		content: "";
 	}
-	.back.flip-item{
-		text-align: center;
-		line-height: 30px;
-	}
-	.map-wrap {
-    margin: 0 200px;
-	}
 </style>
 <script>
 	$(document).ready(function () {
@@ -217,162 +210,6 @@
 	}
 </script>
 
-
-<div class="b_wrap">
-	<div class="busi_content_wrap">
-		<ul class="business_list">
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">앱(APP)개발</p>
-						<p class="subTitleEng">android/ios app</p>
-						<div class="img_wrap">
-							<!-- <img src="/public/user/main/구글스토어.png" alt="구글스토어" class= />
-							<img src="/public/user/main/앱스토어.png" alt="앱스토어" /> -->
-							<img src="/public/user/main/앱개발아이콘.png" alt="">
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item">구글스토어에서 사람들에게 사랑받는 Andoird, iOS 앱을 만듭니다.</div>
-			</div>
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">웹(WEB)구축</p>
-						<p class="subTitleEng">responsive web</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/web.png" alt="웹구축" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item">감성적이면서 차별화된 디자인, 전략적인 시스템 구축, 신속한 유지보수까지 리소프트에서 만들어드립니다.</div>
-			</div>
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">빅데이터분석</p>
-						<p class="subTitleEng">ai bigdata</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/bigdata.png" alt="빅데이터분석" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item">기업이 본연의 고객가치에 집중할 수 있도록 필요한 데이터와 솔루션을 API로 제공해드립니다.</div>
-			</div>
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">메타버스구현</p>
-						<p class="subTitleEng">metaverse</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/metaverse.png" alt="메타버스" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item">메타버스는 현실과 가상의 융합을 통해 시공간의 한계를 초월하여 다양한 형태의 연결과 소통, 협업 등을
-											지원하는 기술 및 플랫폼을 의미하며, 가상세계에서 사회적, 경제적, 문화적 활동 등이 이루어 질 수
-											있도록 하는 것이 메타버스의 궁극적 목표</div>
-			</div>
-		</ul>
-	</div>
-</div>
-
-
-<div class="news_wrap">
-	<div class="news_content_wrap">
-		<div class="title tit_center">
-			<h2 class="h_tit">프로젝트</h2>
-			<p class="subTitleEng">resoft projects</p>
-		</div>
-		<div class="btn_wrap">
-			<!-- <a href="#" class="more"><span>more</span></a> -->
-		</div>
-	</div>
-	
-	<div class="container_slide">
-		<section class="news_list slider">
-			<% for(var i = 0; i < projectRes.length; i++){ %>
-			<div class="slide">
-				<a href="javascript:void(0);">
-					<div class="new_img">
-						<img style="height:540px" src="<%=projectRes[i].projectImg%>" alt="">
-					</div>
-					<div class="new_body">
-						<span class="cate">[<%=projectRes[i].projectType%>]</span>
-						<h3 class="news_tit"><%=projectRes[i].projectTitle%></h3>
-					</div>
-				</a>
-			</div>
-			<%}%>
-		</section>
-	</div>
-</div>
-<div class="cus_wrap">
-	<img src="/public/user/main/에코스봇.png" alt="" class="ecoce-bot wow fadeInDown" data-wow-delay="0.3s">
-	<img src="/public/user/main/환경부탄소중립기본법.png" alt="" class="ministry-Environ-img wow fadeInRight"
-		data-wow-delay="0.3s">
-	<div class="ecoce-img-wrap">
-		<img src="/public/user/main/에코스모바일원.png" alt="" class="ecoce-img wow fadeInLeft" data-wow-delay="0.3s">
-		<!-- <img src="/public/user/main/휴대폰원배경.png" alt=""> -->
-	</div>
-	<div class="eco-clean-earth wow fadeInRight" data-wow-delay="0.6s">
-		<p>국내 최초 <br />
-			&#10075; 탄소중립 실천인증 플랫폼 &#10076;
-		</p>
-		<p>ECO-Clean Earth</p>
-	</div>
-</div>
-<!-- <div class="clients-img-wrap wow fadeInUp" data-wow-delay="0.8s"> -->
-</div>
-<div class="box_wrap">
-	<div class="img_btn">
-		<img src="/public/user/main/리소프트로고_big.png" alt="" class="wow fadeInDown" data-wow-delay="0.3s">
-		<div class="box_btn btn-holder">
-			<!-- <button class="btn btn-3 hover-border-1">
-				<a href="/public/user/main/대구인문사회대학 입학원서.hwp" class="cus_btn" download><span>채용원서 다운로드</span></a>
-			</button>
-			<button class="btn btn-3 hover-border-1">
-				<a href="#" class="loc_btn"><span class="second-btn-txt">온라인 서비스문의</span></a>
-			</button> -->
-		</div>
-	</div>
-</div>
-
-<div class="clients-img-wrap ">
-	<!-- <img src="/public/user/main/연계.png" alt=""> -->
-	<ul>
-		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.<%=i+1%>s">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i].partnersName%></p>
-		</li>
-		<%}%>
-
-		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.<%=8-i%>s">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i+9].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i+9].partnersName%></p>
-		</li>
-		<%}%>
-
-		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.<%=i%>s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i+18].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i+18].partnersName%></p>
-		</li>
-		<%}%>
-	</ul>
-	<button class="load"><i class="fa-solid fa-circle-plus"></i></button>
-</div>
-
-
-
 <div class="map-wrap">
 	<div id="map" class="indexKakaoMap wow fadeIn" data-wow-delay="0.3s"></div>
 	<div class="map-info-wrap wow fadeInRight" data-wow-delay="0.5s">
@@ -439,29 +276,6 @@
 
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
-
-
-	// 애니메이션
-	// let ecoceImg = document.querySelector('.ecoce-img');
-	// let fadeIn = document.querySelectorAll('#fadeInRight');
-	// let indexKakaoMap = document.querySelector('.indexKakaoMap');
-
-	// window.addEventListener("scroll", function() {
-	// 	let value = window.scrollY;
-
-	// 	if(value > 1900 && value < 3600) {
-	// 		ecoceImg.style.animation = "fade-in-left 1s ease-in forwards";
-	// 		indexKakaoMap.style.animation = "fade-in-left 1s ease-in forwards";
-	// 		for(const fadeInRight of fadeIn) {
-	// 			fadeInRight.style.animation = "fade-in-right 1s ease-in forwards";
-	// 		}
-	// 	}
-	// });
-	// document.querySelectorAll('.button').forEach(button => 
-	// 	button.innerHTML = '<div><span>' + 
-		// 	button.textContent.trim().split('').join('</span><span>') + 
-			// 	'</span></div>');
-
 			
 			// 아이콘 8개
 			if (window.matchMedia("screen and (max-width: 1217px)").matches) {
