@@ -92,13 +92,12 @@
 		position: absolute;
 		content: "";
 	}
-	.back.flip-item{
+
+	.back.flip-item {
 		text-align: center;
 		line-height: 30px;
 	}
-	.map-wrap {
-    margin: 0 200px;
-	}
+
 </style>
 <script>
 	$(document).ready(function () {
@@ -224,7 +223,7 @@
 			<div class="flip">
 				<li class="front flip-item">
 					<a href="javascript:void(0);">
-						<p class="title">앱(APP)개발</p>
+						<p class="title">앱(APP) 개발</p>
 						<p class="subTitleEng">android/ios app</p>
 						<div class="img_wrap">
 							<!-- <img src="/public/user/main/구글스토어.png" alt="구글스토어" class= />
@@ -233,45 +232,43 @@
 						</div>
 					</a>
 				</li>
-				<div class="back flip-item">구글스토어에서 사람들에게 사랑받는 Andoird, iOS 앱을 만듭니다.</div>
+				<div class="back flip-item">Android 앱 개발 <br>iOS 앱 개발 <br>플랫폼 기획 및 설계</div>
 			</div>
 			<div class="flip">
 				<li class="front flip-item">
 					<a href="javascript:void(0);">
-						<p class="title">웹(WEB)구축</p>
+						<p class="title">웹(WEB) 구축</p>
 						<p class="subTitleEng">responsive web</p>
 						<div class="img_wrap">
 							<img src="/public/user/main/web.png" alt="웹구축" />
 						</div>
 					</a>
 				</li>
-				<div class="back flip-item">감성적이면서 차별화된 디자인, 전략적인 시스템 구축, 신속한 유지보수까지 리소프트에서 만들어드립니다.</div>
+				<div class="back flip-item">반응형 홈페이지 구축 <br>데이터베이스 구축 <br>빅데이터 구축</div>
 			</div>
 			<div class="flip">
 				<li class="front flip-item">
 					<a href="javascript:void(0);">
-						<p class="title">빅데이터분석</p>
+						<p class="title">AI 기반 기술개발</p>
 						<p class="subTitleEng">ai bigdata</p>
 						<div class="img_wrap">
 							<img src="/public/user/main/bigdata.png" alt="빅데이터분석" />
 						</div>
 					</a>
 				</li>
-				<div class="back flip-item">기업이 본연의 고객가치에 집중할 수 있도록 필요한 데이터와 솔루션을 API로 제공해드립니다.</div>
+				<div class="back flip-item">AI 대화형 챗봇 <br>자동 객체인식 검출기 <br>딥러닝 학습 모델</div>
 			</div>
 			<div class="flip">
 				<li class="front flip-item">
 					<a href="javascript:void(0);">
-						<p class="title">메타버스구현</p>
+						<p class="title">XR 콘텐츠 구현</p>
 						<p class="subTitleEng">metaverse</p>
 						<div class="img_wrap">
 							<img src="/public/user/main/metaverse.png" alt="메타버스" />
 						</div>
 					</a>
 				</li>
-				<div class="back flip-item">메타버스는 현실과 가상의 융합을 통해 시공간의 한계를 초월하여 다양한 형태의 연결과 소통, 협업 등을
-											지원하는 기술 및 플랫폼을 의미하며, 가상세계에서 사회적, 경제적, 문화적 활동 등이 이루어 질 수
-											있도록 하는 것이 메타버스의 궁극적 목표</div>
+				<div class="back flip-item">실감형 플랫폼 구축<br>가상현실 콘텐츠 제작<br>게임콘텐츠제작</div>
 			</div>
 		</ul>
 	</div>
@@ -288,7 +285,7 @@
 			<!-- <a href="#" class="more"><span>more</span></a> -->
 		</div>
 	</div>
-	
+
 	<div class="container_slide">
 		<section class="news_list slider">
 			<% for(var i = 0; i < projectRes.length; i++){ %>
@@ -342,31 +339,31 @@
 	<!-- <img src="/public/user/main/연계.png" alt=""> -->
 	<ul>
 		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="0.<%=i+1%>s">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i].partnersName%></p>
-		</li>
-		<%}%>
+			<li class="wow fadeInUp customer_list" data-wow-delay="0.<%=i+1%>s">
+				<div class="img-wrap">
+					<img src="<%=partnersRes[i].partnerImg%>" alt="">
+				</div>
+				<p><%=partnersRes[i].partnersName%></p>
+			</li>
+			<%}%>
 
 		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="1.<%=8-i%>s">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i+9].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i+9].partnersName%></p>
-		</li>
-		<%}%>
+			<li class="wow fadeInUp customer_list" data-wow-delay="1.<%=8-i%>s">
+				<div class="img-wrap">
+					<img src="<%=partnersRes[i+9].partnerImg%>" alt="">
+				</div>
+				<p><%=partnersRes[i+9].partnersName%></p>
+			</li>
+			<%}%>
 
 		<% for(var i = 0; i < 9; i++){ %>
-		<li class="wow fadeInUp customer_list" data-wow-delay="2.<%=i%>s" data-wow-offset="-30">
-			<div class="img-wrap">
-				<img src="<%=partnersRes[i+18].partnerImg%>" alt="">
-			</div>
-			<p><%=partnersRes[i+18].partnersName%></p>
-		</li>
-		<%}%>
+			<li class="wow fadeInUp customer_list" data-wow-delay="2.<%=i%>s" data-wow-offset="-30">
+				<div class="img-wrap">
+					<img src="<%=partnersRes[i+18].partnerImg%>" alt="">
+				</div>
+				<p><%=partnersRes[i+18].partnersName%></p>
+			</li>
+			<%}%>
 	</ul>
 	<button class="load"><i class="fa-solid fa-circle-plus"></i></button>
 </div>
@@ -405,7 +402,6 @@
 
 
 
-<%- include('../partials/userFooter.ejs') %>
 
 <script>
 	// 카카오 지도 api
@@ -552,3 +548,5 @@
 		})
 	}
 </script>
+
+<%- include('../partials/userFooter.ejs') %>

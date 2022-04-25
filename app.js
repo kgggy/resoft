@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express(); //express 패키지 호출, app변수 객체 생성. => app객체에 기능 하나씩 연결.
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // css 연결
 app.use('/public', express.static(path.join(__dirname, 'public'))); //정적 파일 사용
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(expressLayouts);
 
 // 세션 설정
 app.use( // request를 통해 세션 접근 가능 ex) req.session
@@ -36,6 +38,8 @@ app.use( // request를 통해 세션 접근 가능 ex) req.session
 );
 
 // 화면 engine을 ejs로 설정
+app.set('layout', 'layout/layout');
+app.set("layout extractScripts", true);
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 

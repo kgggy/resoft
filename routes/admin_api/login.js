@@ -2,14 +2,16 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var crypto = require('crypto');
-const models = require('../../models');
+//const models = require('../../models');
 
 var connection = require('../../config/db').conn;
 
 //로그인 페이지
 router.get('/', async (req, res) => {
     let route = req.app.get('views') + '/ejs/admin/index.ejs';
-    res.render(route);
+    res.render(route, {
+        layout: false
+    });
 });
 
 //로그인

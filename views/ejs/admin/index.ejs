@@ -1,5 +1,5 @@
 <title>RESOFT</title>
-<link rel="shortcut icon" href="/public/user/main/logo01.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/public/user/main/web.png" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="/public/stylesheets/css/style.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
@@ -21,14 +21,14 @@
 </style> -->
 
 <body class="app flex-row align-items-center"
-	style="background: url('${contextPath}/images/user/main/banner1-6.png') no-repeat; background-size: 100%;">
-	<div class="container">
+	style="background: url('') no-repeat; background-size: 100%;">
+	<div class="container" style="margin-left: 250px;">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<div class="card-group">
 					<div class="card p-4" style="opacity: 0.96;">
 						<div class="card-body">
-							<img alt="로고" src="" >
+							<img alt="로고" src="/images/KakaoTalk_20220222_014017692_02.gif" style="width: 300px;">
 							<p class="text-muted">Sign In to your account</p>
 
 							<form class="form-horizontal" id="frm" action="/admin/login" method="post">
@@ -62,7 +62,7 @@
 					</div>
 					<div class="card text-white bg-primary d-md-down-none" style="width:44%; opacity: 0.96;">
 						<div style="text-align: center;">
-							<img alt="로고" src="" width="100%">
+							<img alt="로고" src="/images/KakaoTalk_20220222_014017692.gif" style="height: 450px;width: 700px;">
 						</div>
 					</div>
 				</div>
@@ -70,3 +70,11 @@
 		</div>
 	</div>
 </body>
+
+<script>
+$(document).bind('keypress', function(event) {
+if( event.which === 65 && event.shiftKey ) {
+alert('you pressed SHIFT+A');
+}
+});
+</script>
