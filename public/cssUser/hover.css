@@ -155,7 +155,7 @@ html {
           box-sizing: inherit;
 }
 
-/* body {
+body {
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -168,7 +168,7 @@ html {
       -ms-flex-align: center;
           align-items: center;
   background: #E4ECFA;
-} */
+}
 
 body .button {
   margin: 0 12px;

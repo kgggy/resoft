@@ -439,7 +439,7 @@ textarea{margin: 0px;width: 53%;height: 80px; border: 1px solid #a9a9a9;  paddin
 .map-wrap .map-info-wrap .map-info p:last-child{line-height: 25px;}
 .map-wrap .map-info-wrap .map-info a p,
 .map-wrap .map-info-wrap .map-info p:last-child{color: #7b7b7b;}
-.cus_wrap {background: url(/user/main/welcome_bg.png) no-repeat; max-width: 1400px; height: 1100px; margin: 0 auto; display: block; margin-top: 60px; margin-bottom: 250px; position: relative; background-position: center;}
+.cus_wrap {background: url(/user/main/web.png) no-repeat; max-width: 1400px; height: 1100px; margin: 0 auto; display: block; margin-top: 60px; margin-bottom: 250px; position: relative; background-position: center;}
 .cus_wrap .ecoce-bot{position: absolute; top: 5%; right: 0; width: 740px;}
 .cus_wrap .ministry-Environ-img{position: absolute; right: 0; top: 290px; width: 350px;}
 .cus_wrap .ecoce-img-wrap{position: relative; height: 100%; top: 160px; width: 960px;}
