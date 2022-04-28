@@ -46,14 +46,14 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', path.join(__dirname, '/views'));
 // app.get("/", (req, res) => { res.render('index.html', {layout:false})  })
 
-app.get("/sub01_1", (req, res) => { res.render('userEjs/sub1/sub1_1.ejs'); })
-app.get("/sub01_2", (req, res) => { res.render('userEjs/sub1/sub1_2.ejs'); })
-app.get("/sub01_3", (req, res) => { res.render('userEjs/sub1/sub1_3.ejs'); })
-app.get("/sub01_4", (req, res) => { res.render('userEjs/sub1/sub1_4.ejs'); })
-app.get("/sub02_1", (req, res) => { res.render('userEjs/sub2/sub2_1.ejs'); })
-app.get("/sub02_2", (req, res) => { res.render('userEjs/sub2/sub2_2.ejs'); })
-app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
-app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
+// app.get("/sub01_1", (req, res) => { res.render('userEjs/sub1/sub1_1.ejs'); })
+// app.get("/sub01_2", (req, res) => { res.render('userEjs/sub1/sub1_2.ejs'); })
+// app.get("/sub01_3", (req, res) => { res.render('userEjs/sub1/sub1_3.ejs'); })
+// app.get("/sub01_4", (req, res) => { res.render('userEjs/sub1/sub1_4.ejs'); })
+// app.get("/sub02_1", (req, res) => { res.render('userEjs/sub2/sub2_1.ejs'); })
+// app.get("/sub02_2", (req, res) => { res.render('userEjs/sub2/sub2_2.ejs'); })
+// app.get("/sub04_1", (req, res) => { res.render('userEjs/sub4/sub4_1.ejs'); })
+// app.get("/sub5_3_detail", (req, res) => { res.render('userEjs/sub5/sub5_3_detail.ejs'); })
 
 app.set('routes', path.join(__dirname, '/routes'));
 
@@ -74,12 +74,12 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { layout: false });
 });
 
 app.all('*',
   function (req, res) {
-    res.render('error.ejs', {layout:false});
+    res.render('error', {layout:false});
   });
 
 module.exports = app; //app객체를 모듈로 만듦(bin/www에서 사용된 app모듈)
