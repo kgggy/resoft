@@ -45,7 +45,10 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('views', path.join(__dirname, '/views'));
 // app.get("/", (req, res) => { res.render('index.html', {layout:false})  })
-
+// app.get('/', (req, res) => { res.render(__dirname + "/views/ejs/index.ejs", {layout:false}) })
+app.get('/', (req, res) => {
+  res.redirect('/admin');
+})
 // app.get("/sub01_1", (req, res) => { res.render('userEjs/sub1/sub1_1.ejs'); })
 // app.get("/sub01_2", (req, res) => { res.render('userEjs/sub1/sub1_2.ejs'); })
 // app.get("/sub01_3", (req, res) => { res.render('userEjs/sub1/sub1_3.ejs'); })
