@@ -20,7 +20,6 @@ router.post('/login', async (req, res) => {
         adminNick,
         adminPwd
     } = req.body;
-
     const nickChk = await models.admin.findOne({
             where: {
                 adminNick
@@ -62,7 +61,7 @@ router.post('/login', async (req, res) => {
         } else {                                    // 세션 없는 admin일 경우 만들어줌
             req.session.user = {
                 // isAdmin: true,           // user, admin 구분해주려고. admin 계정밖에 없으니까 필요없음.
-                id: adminNick,
+                id: adminNick
             };
             res.redirect('/admin/main');
         }
