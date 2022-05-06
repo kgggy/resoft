@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var crypto = require('crypto');
-//const models = require('../../models');
+const models = require('../../models');
 
 var connection = require('../../config/db').conn;
 

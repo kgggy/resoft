@@ -19,7 +19,7 @@
                         <p><span>팩스. </span><a href="javascript:void(0);" style="cursor: text"><span>(0504)
                                     257-5966</span></a>
                             <p><span>이메일. </span><span>call@resoft.kr</span></p>
-                            <!-- <a href="/admin" class="admin_btn" style="color: #321cc1; background-color: azure;"><span>&nbsp;&nbsp;관리자 페이지 이동하기&nbsp;&nbsp;</span></a> -->
+                    <div id="admin" style="display: none;"><a href="/admin" class="admin_btn" style="color: #321cc1; background-color: azure;"><span>&nbsp;&nbsp;관리자 페이지 이동하기&nbsp;&nbsp;</span></a></div>
                 </div>
             </div><br />
             <p class="copyright">Copyright(c) RESOFT CO.LTD. All right reserved.</p>
@@ -28,8 +28,12 @@
 </footer>
 
 <script>
-    var toggleBtn = document.querySelector('#subs2.subs');
-    toggleBtn.addEventListener('click', () => {
-        document.querySelector('.sub_option').classList.toggle("option_active");
+    var adminDiv = document.getElementById("admin");
+    $(document).bind('keypress', function(event) {
+        if( event.which === 82 && event.shiftKey ) {
+            adminDiv.style.display = "block"
+        }
     });
+    
+    
 </script>
