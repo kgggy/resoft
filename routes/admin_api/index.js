@@ -6,6 +6,9 @@ const login = require('./login.js');
 const main = require('./main.js');
 const weekReport = require('./weekReport.js');
 const weekReportInsert = require('./weekReportInsert.js');
+const weekReportOne = require('./weekReportOne.js');
+const weekReportUpdate = require('./weekReportUpdate.js');
+const weekReportDelete = require('./weekReportDelete.js');
 
 // router.use('/', (req,res,next) => {
 //     if(req.url == '/' || req.url == '/login') {
@@ -31,6 +34,8 @@ router.use('/', login);
 router.use('/main', main);
 router.use('/weekReport', weekReport);
 router.use('/weekReportInsert', weekReportInsert);
-
+router.use('/weekReportOne', weekReportOne);
+router.use('/weekReportUpdate', weekReportUpdate);
+router.use('/weekReportDelete', weekReportDelete);
 
 module.exports = router;

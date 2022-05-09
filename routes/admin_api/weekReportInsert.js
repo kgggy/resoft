@@ -5,7 +5,7 @@ var connection = require('../../config/db').conn;
 
 //게시글 등록 폼 이동
 router.get('/', async (req, res) => {
-    let route = req.app.get('views') + '/ejs/admin/weekReportInsert.ejs';
+    let route = req.app.get('views') + '/ejs/admin/weekReport_writForm.ejs';
     var page = req.query.page;
     res.render(route, {
         page: page
@@ -15,9 +15,18 @@ router.get('/', async (req, res) => {
 //공지사항 작성
 router.post('/', async (req, res, next) => {
     try {
-        const adminId = req.session.user.id;
-        const report = req.body.report;
-        newReport = report.toString().replaceAll(",","<br>")
+        
+        // const adminId = req.session.user.id;
+        const adminId = "김진성";
+        var report = req.body.report;
+        var nextPlan = req.body.nextPlan;
+        
+        report = report.toString().replaceAll(",", "</li><br><li>");
+        lastReport = "<li>" + report + "</li>" ;
+
+        nextPlan = nextPlan.toString().replaceAll(",", "</li><br><li>");
+        lastNextPlan = "<li>" + nextPlan + "</li>";
+
         const param1 = adminId
         
         const sql1 = "select adminId from admin where adminNick = ?";
@@ -28,7 +37,7 @@ router.post('/', async (req, res, next) => {
                 throw err;
             }
             console.log(result)
-            const param2 = [newReport, req.body.nextPlan, req.body.note, result[0].adminId];
+            const param2 = [lastReport, lastNextPlan, req.body.note, result[0].adminId];
             connection.query(sql2, param2, (err) => {
                 if (err) {
                     throw err;
@@ -41,6 +50,4 @@ router.post('/', async (req, res, next) => {
         res.send(error.message);
     }
 });
-
-module.exports = router;
 module.exports = router;
