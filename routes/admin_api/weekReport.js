@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         if (searchText != '') {
             sql += " and (a.adminNick like '%" + searchText + "%')";
         }
-    sql += " order by 1";
+    sql += " order by 1 desc";
     
     try {
         connection.query(sql, function (err, results) {
@@ -28,7 +28,6 @@ router.get('/', async (req, res) => {
             if (err) {
                 console.log(err);
             }
-
             if (last < endPage) {
                 endPage = last
             };
@@ -50,7 +49,6 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(401).send(error.message);
     }
-
 });
 
 module.exports = router;
