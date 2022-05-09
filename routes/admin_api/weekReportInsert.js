@@ -16,8 +16,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res, next) => {
     try {
         
-        // const adminId = req.session.user.id;
-        const adminId = "김진성";
+        const adminId = req.session.user.id;
         var report = req.body.report;
         var nextPlan = req.body.nextPlan;
         
