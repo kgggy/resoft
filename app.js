@@ -37,6 +37,13 @@ app.use( // request를 통해 세션 접근 가능 ex) req.session
   })
 );
 
+app.use(function (req, res, next) {
+  if (req.session.user) {
+    global.sessionId = req.session.user.id;
+  }
+  next();
+});
+
 // 화면 engine을 ejs로 설정
 app.set('layout', 'layout/layout');
 app.set("layout extractScripts", true);
