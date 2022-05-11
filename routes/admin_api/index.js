@@ -10,6 +10,8 @@ const weekReportOne = require('./weekReportOne.js');
 const weekReportUpdate = require('./weekReportUpdate.js');
 const weekReportDelete = require('./weekReportDelete.js');
 
+const calendar = require('./calendar.js');
+
 // router.use('/', (req,res,next) => {
 //     if(req.url == '/' || req.url == '/login') {
 //         // console.log("세션 검사 하지않고 로그인페이지로")
@@ -37,5 +39,7 @@ router.use('/weekReportInsert', weekReportInsert);
 router.use('/weekReportOne', weekReportOne);
 router.use('/weekReportUpdate', weekReportUpdate);
 router.use('/weekReportDelete', weekReportDelete);
+
+router.use('/calendar', calendar);
 
 module.exports = router;
