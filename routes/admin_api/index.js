@@ -4,12 +4,19 @@ const router = express.Router();
 
 const login = require('./login.js');
 const main = require('./main.js');
-const weekReport = require('./weekReport.js');
-const weekReportInsert = require('./weekReportInsert.js');
-const weekReportOne = require('./weekReportOne.js');
-const weekReportUpdate = require('./weekReportUpdate.js');
-const weekReportDelete = require('./weekReportDelete.js');
 
+const weekReport = require('./weekReport/weekReport.js');
+const weekReportInsert = require('./weekReport/weekReportInsert.js');
+const weekReportOne = require('./weekReport/weekReportOne.js');
+const weekReportUpdate = require('./weekReport/weekReportUpdate.js');
+const weekReportDelete = require('./weekReport/weekReportDelete.js');
+
+const boardMain = require('./board/boardMain.js');
+const boardSearch = require('./board/boardSearch.js');
+const boardSelectOne = require('./board/boardSelectOne.js');
+const boardInsert = require('./board/boardInsert.js');
+const boardUpdate = require('./board/boardUpdate.js');
+const boardDelete = require('./board/boardDelete.js');
 // router.use('/', (req,res,next) => {
 //     if(req.url == '/' || req.url == '/login') {
 //         // console.log("세션 검사 하지않고 로그인페이지로")
@@ -32,10 +39,18 @@ const weekReportDelete = require('./weekReportDelete.js');
 
 router.use('/', login);
 router.use('/main', main);
+
 router.use('/weekReport', weekReport);
 router.use('/weekReportInsert', weekReportInsert);
 router.use('/weekReportOne', weekReportOne);
 router.use('/weekReportUpdate', weekReportUpdate);
 router.use('/weekReportDelete', weekReportDelete);
+
+router.use('/boardMain', boardMain);
+router.use('/boardSearch', boardSearch);
+router.use('/boardSelectOne', boardSelectOne);
+router.use('/boardInsert', boardInsert);
+router.use('/boardUpdate', boardUpdate);
+router.use('/boardDelete', boardDelete);
 
 module.exports = router;
