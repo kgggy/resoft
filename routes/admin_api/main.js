@@ -7,7 +7,7 @@ var connection = require('../../config/db').conn;
 router.get('/', async (req, res) => {
     let route = req.app.get('views') + '/ejs/admin/main.ejs';
     res.render(route, {
-        sessionId: 1
+        sessionId: req.session.user.id
     });
 });
 
