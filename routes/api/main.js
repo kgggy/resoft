@@ -21,8 +21,8 @@ router.get('/', async (req, res) => {
                     console.log("query error");
                 }
                 projectRes = result2;
-                console.log(partnersRes);
-                console.log(projectRes);
+                // console.log(partnersRes);
+                // console.log(projectRes);
                 let route = req.app.get('views') + '/ejs/userEjs/index.ejs';
                 res.render(route, {
                     layout: false,
