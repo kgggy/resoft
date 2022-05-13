@@ -250,51 +250,51 @@
                     }
                 }
             },
-            // dateClick: function (info) { //날짜 클릭하면 일정등록
-            //     // alert('a day has been clicked!' + info.dateStr);
-            //     $("#calendarModal").modal("show");
-            //     $("#calendar_start_date").attr('value', info.dateStr);
-            //     $("#calendar_end_date").attr('value', info.dateStr);
+            dateClick: function (info) { //날짜 클릭하면 일정등록
+                // alert('a day has been clicked!' + info.dateStr);
+                $("#calendarModal").modal("show");
+                $("#calendar_start_date").attr('value', info.dateStr);
+                $("#calendar_end_date").attr('value', info.dateStr);
 
-            //     $("#addCalendar").on("click", function () { // modal의 추가 버튼 클릭 시
-            //         var content = $("#calendar_content").val();
-            //         var start_date = $("#calendar_start_date").val();
-            //         var end_date = $("#calendar_end_date").val();
-            //         //내용 입력 여부 확인
-            //         if (content == null || content == "") {
-            //             alert("내용을 입력하세요.");
-            //         } else if (start_date == "" || end_date == "") {
-            //             alert("날짜를 입력하세요.");
-            //         } else if (new Date(end_date) - new Date(start_date) <
-            //             0) { // date 타입으로 변경 후 확인
-            //             alert("종료일이 시작일보다 먼저입니다.");
-            //         } else { // 정상적인 입력 시
-            //             var obj = {
-            //                 "title": content,
-            //                 "start": start_date,
-            //                 "end": end_date
-            //             } //전송할 객체 생성
+                $("#addCalendar").on("click", function () { // modal의 추가 버튼 클릭 시
+                    var content = $("#calendar_content").val();
+                    var start_date = $("#calendar_start_date").val();
+                    var end_date = $("#calendar_end_date").val();
+                    //내용 입력 여부 확인
+                    if (content == null || content == "") {
+                        alert("내용을 입력하세요.");
+                    } else if (start_date == "" || end_date == "") {
+                        alert("날짜를 입력하세요.");
+                    } else if (new Date(end_date) - new Date(start_date) <
+                        0) { // date 타입으로 변경 후 확인
+                        alert("종료일이 시작일보다 먼저입니다.");
+                    } else { // 정상적인 입력 시
+                        var obj = {
+                            "title": content,
+                            "start": start_date,
+                            "end": end_date
+                        } //전송할 객체 생성
 
-            //             // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
-            //             $.ajax({
-            //                 type: 'post',
-            //                 url: '/admin/calendar/insert',
-            //                 data: {
-            //                     obj: obj
-            //                 },
-            //                 dataType: 'json',
-            //                 success: function () {
-            //                     $("#calendarModal").modal("hide");
-            //                     alert("일정 등록이 완료되었습니다.");
-            //                     location.reload();
-            //                 },
-            //                 error: function (e) {
-            //                     console.log('error:' + e.status);
-            //                 }
-            //             });
-            //         }
-            //     });
-            // },
+                        // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
+                        $.ajax({
+                            type: 'post',
+                            url: '/admin/calendar/insert',
+                            data: {
+                                obj: obj
+                            },
+                            dataType: 'json',
+                            success: function () {
+                                $("#calendarModal").modal("hide");
+                                alert("일정 등록이 완료되었습니다.");
+                                location.reload();
+                            },
+                            error: function (e) {
+                                console.log('error:' + e.status);
+                            }
+                        });
+                    }
+                });
+            },
             eventClick: function (arg) { // 이벤트 클릭 시
                 // console.log(arg)
                 var id = arg.event._def.extendedProps.calendarId //해당 이벤트 아이디 가져오기
