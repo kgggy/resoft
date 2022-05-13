@@ -3,9 +3,9 @@ var router = express.Router();
 const models = require('../../../models');
 var connection = require('../../../config/db').conn;
 
-//게시글 수정 폼 이동
+//주간업무일지 수정 폼 이동
 router.get('/', async (req, res) => {
-    let route = req.app.get('views') + '/ejs/admin/weekReport_udtForm.ejs';
+    let route = req.app.get('views') + '/ejs/admin/weekReport/weekReport_udtForm.ejs';
     var page = req.query.page;
     var searchType1 = req.query.searchType1 == undefined ? "" : req.query.searchType1;
     var searchText = req.query.searchText == undefined ? "" : req.query.searchText;
@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
                 console.error(err);
             }
 
+            // 주간업무일지 상세보기와 로직 동일
             var report = result[0].report
             if (report.indexOf('完,') != -1) {
                 do {
@@ -30,7 +31,6 @@ router.get('/', async (req, res) => {
             } else {
                 reports.push(report);
             }
-
             var nextPlan = result[0].nextPlan
             if (nextPlan.indexOf('完,') != -1) {
                 do {
@@ -41,7 +41,6 @@ router.get('/', async (req, res) => {
             } else {
                 nextPlans.push(nextPlan);
             }
-
         res.render(route, {
             page: page,
             searchText: searchText,
@@ -69,6 +68,7 @@ router.post('/', async (req, res) => {
     var nextPlan = req.body.nextPlan;
     var lastNextPlan = [];
 
+    // 주간업무일지 등록과 로직 동일
     if (typeof report == 'object') {
         for (var i = 0; i < report.length; i++) {
             lastReport.push(report[i] + '完');

@@ -142,8 +142,8 @@
 		background-size: cover;
 	}
 	.new_img .logo {
-		width: auto;
-		height: 70px;
+		width: 100%;
+		height: 100%;
 		align-self: flex-end;
 	}
 	.work-title {
@@ -298,7 +298,7 @@
                </a>
             </li>
             <div class="back flip-item">
-               <a href="" class="layoutImg"></a>
+               <a href='javascript:void(0)' id='test' onclick='preventClick(event)' class="layoutImg"></a>
                <img src="/public/user/main/앱개발.jpg" style="height: 100%; width: 100%">
                <div class="app-text">
                   <!-- <p class="backTitle">앱(APP) 개발</p>
@@ -318,7 +318,7 @@
                </a>
             </li>
             <div class="back flip-item">
-               <a href="" class="layoutImg"></a>
+               <a href='javascript:void(0)' id='test' onclick='preventClick(event)' class="layoutImg"></a>
                <img src="/public/user/main/웹구축.jpg" style="height: 100%; width: 100%">
                <!-- <p class="backTitle">웹(WEB) 구축</p>
                <p class="subTitleEng">responsive web</p><br> -->
@@ -338,7 +338,7 @@
                </a>
             </li>
             <div class="back flip-item">
-               <a href="" class="layoutImg"></a>
+               <a href='javascript:void(0)' id='test' onclick='preventClick(event)' class="layoutImg"></a>
                <img src="/public/user/main/AI기술개발.jpg" style="height: 100%; width: 100%">
                <!-- <p class="backTitle">AI 기반 기술개발</p>
                <p class="subTitleEng">ai bigdata</p><br> -->
@@ -358,7 +358,7 @@
                </a>
             </li>
             <div class="back flip-item">
-               <a href="" class="layoutImg"></a>
+               <a href='javascript:void(0)' id='test' onclick='preventClick(event)' class="layoutImg"></a>
                <img src="/public/user/main/XR콘텐츠.jpg" style="height: 100%; width: 100%">
                <!-- <p class="backTitle">XR 콘텐츠 구현</p>
                <p class="subTitleEng">metaverse</p><br> -->
@@ -388,7 +388,7 @@
 			<% for(var i = 0; i < projectRes.length; i++){ %>
 			<div class="slide">
 				<a href="javascript:void(0);">
-					<div class="new_img" style="height:300px; background-image: url(/public/user/main/액자.png); background-size:100% 100%;" >
+					<div class="new_img" style="height:300px; background-color: #ffffff;" >
 						<div class="cont"><p class="work-title"><%=projectRes[i].projectTitle%><br></p>		
 							<img class="logo" src="<%=projectRes[i].projectImg%>" alt="[<%=projectRes[i].projectType%>]"></div>
 					</div>
@@ -640,6 +640,9 @@
 			window.scrollTo(0, window.pageYOffset + 1);
 			window.scrollTo(0, window.pageYOffset - 1);
 		})
+	}
+	function preventClick(e){
+		e.preventDefault()
 	}
 </script>
 
