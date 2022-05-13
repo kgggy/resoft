@@ -213,7 +213,7 @@ letter-spacing: -1px; position: absolute; z-index: 999; left: 20%; top: 30%;}
 
 /* 사업영역 */
 .tit_center {text-align: center; float: none;}
-.title .h_tit {font-size: 42px; font-weight: 600; color: white;}
+.title .h_tit {font-size: 42px; font-weight: 600; color: navy;}
 /* .title p {font-size: 16px; color: var(--pink-color); font-weight: 600; letter-spacing: 2px; font-family: 'Montserrat', 'Noto Sans KR';} */
 /* .main{width: 1200px;margin: 50px auto 0;}
 .main > * {display: none;} */
@@ -236,7 +236,7 @@ letter-spacing: -1px; position: absolute; z-index: 999; left: 20%; top: 30%;}
 .b_wrap .business_list .flip .flip-item{backface-visibility: hidden; background: #f6f6f6; transition: 1s; width: 100%; height: 100%;}
 .b_wrap .business_list .flip .front{position: absolute; backface-visibility: hidden; transition: 1s; transform: rotateY(0deg);}
 .b_wrap .business_list .flip .front a{display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.b_wrap .business_list .flip .back {transform: rotateY(-180deg);display: flex; align-items: center; justify-content: center;flex-direction: column;}
+.b_wrap .business_list .flip .back {transform: rotateY(-180deg);display: flex; align-items: center; justify-content: space-between;flex-direction: column; }
 .b_wrap .business_list .flip:hover .front{transform: rotateY(180deg);}
 .b_wrap .business_list .flip:hover .back{transform: rotateY(0deg); }
 
@@ -323,7 +323,7 @@ textarea{margin: 0px;width: 53%;height: 80px; border: 1px solid #a9a9a9;  paddin
 }
 
 /* 보도자료 */
-.news_wrap{width: 100%; padding: 80px 0; background: url(/public/user/main/슬라이드배경.png) no-repeat; background-color: var(--navy-color);}
+.news_wrap{width: 100%; padding: 80px 0; background-color: #f8f8f8;}
 .news_wrap .news_content_wrap{max-width: 1400px; margin: 0 auto; overflow: hidden;}
 .news_wrap .btn_wrap {float: right; margin-top: 20px;}
 .news_wrap .btn_wrap .more {
@@ -1392,7 +1392,6 @@ cursor:pointer;box-sizing:border-box;transition:background 0.4s;text-decoration:
 	.map-wrap .map-info-wrap {flex-direction: column;}
 	.map-wrap .map-info-wrap .map-info{width: 100%; margin-bottom: 23px;}
 	.map-wrap .map-info-wrap .map-info>p:first-child{margin-bottom: 7px;}
-	.news_wrap{background: url(/public/user/main/슬라이드배경430.png) no-repeat; background-size: cover;}
 	.clients-img-wrap ul li img{padding: 12px;}
 }
 

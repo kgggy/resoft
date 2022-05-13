@@ -4,14 +4,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Resoft</title>
 	<link rel="shortcut icon" href="/public/user/main/web.png" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/basic.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/layout.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/content.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/main.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/reset.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/owl.carousel.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/icg.css" />
-	<link rel="stylesheet" type="text/css" href="/public/cssUser/jquery.bxslider.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/basic.css" />
+	<link rel="stylesheet" type="text/css" href="/css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/content.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/main.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/owl.carousel.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/icg.css" />
+	<link rel="stylesheet" type="text/css" href="/cssUser/jquery.bxslider.css" />
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 	<link rel="stylesheet" href="/public/wow/animate.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -27,88 +27,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="/public/wow/wow.min.js"></script>
 </head>
-<script>
-	$(document).ready(function () {
-		/* $('#submenu-wrapper').css('margin-top', '-22em'); */
-		/* Assign Variables*/
-		// 서브메뉴
-		// menu = $('.menu li');
-		// submenuWrapper = $('#submenu-wrapper');
-		// submenu = submenuWrapper.children('ul');
-		// firstSubmenu = submenu.eq(0);
-
-		// $('.menu li').mouseover(function () {
-		// 	//$('#submenu-wrapper').show();
-
-		// 	$('#submenu-wrapper').stop().animate({
-		// 		'marginTop': '0.04em'
-		// 	});
-		// });
-
-		// $('#submenu-wrapper').mouseleave(function () {
-		// 	$('#submenu-wrapper').animate({
-		// 		'marginTop': '-27em'
-		// 	});
-		// });
-
-
-		// function slideMenu() {
-		// 	var activeState = $("#menu-container .menu-list").hasClass("active");
-
-		// 	if (activeState) {
-		// 		$("#menu-container .menu-list").show();
-		// 	}
-
-		// 	$("#menu-container .menu-list").animate({
-		// 		right: activeState ? "0%" : "-100%"
-		// 	}, 400, null, function () {
-		// 		if (!activeState) {
-		// 			$("#menu-container .menu-list").hide();
-		// 		}
-		// 	});
-		// }
-		// $("#menu-wrapper").click(function (event) {
-		// 	event.stopPropagation();
-		// 	$("#hamburger-menu").toggleClass("open");
-		// 	$("#menu-container .menu-list").toggleClass("active");
-		// 	slideMenu();
-
-		// 	$("body").toggleClass("overflow-hidden");
-		// });
-
-		// $(".menu-list").find(".accordion-toggle").click(function () {
-		// 	$(this).next().toggleClass("open").slideToggle("fast");
-		// 	$(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
-
-		// 	$(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
-		// 	$(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(
-		// 		".menu-link").removeClass("active");
-		// });
-
-		new WOW().init();
-		// const subs = document.getElementById('subs2');
-		// const sub_option = document.getElementsByClassName('sub_option');
-		// console.log(subs);
-		// subs.addEventListener('click', function(){
-		// 	if(sub_option[0].style.display == '') {
-
-		// 	sub_option[0].style.display = 'block';
-		// 	} else {
-		// 		sub_option[0].style.display = '';
-		// 	}
-		// });
-
-		// 	var toggleBtn = document.querySelector('#subs2.subs');
-		// 	toggleBtn.addEventListener('click', () => {
-		// 	document.querySelector('.sub_option').classList.toggle("option_active");
-		// });
-
-		if (window.matchMedia("screen and (max-width: 940px)").matches) {
-		var footerSideImg = document.getElementsByClassName('footer-side-img')[0];
-		footerSideImg.setAttribute('src', '/public/user/main/푸터사이드767.png');
-	}
-	});
-</script>
 
 <div class="topBtn">
 	<button class="move"><i class="fa-solid fa-angle-up"></i></button>
@@ -306,4 +224,87 @@
 		})
 	}
 })
+</script>
+
+<script>
+	$(document).ready(function () {
+		/* $('#submenu-wrapper').css('margin-top', '-22em'); */
+		/* Assign Variables*/
+		// 서브메뉴
+		// menu = $('.menu li');
+		// submenuWrapper = $('#submenu-wrapper');
+		// submenu = submenuWrapper.children('ul');
+		// firstSubmenu = submenu.eq(0);
+
+		// $('.menu li').mouseover(function () {
+		// 	//$('#submenu-wrapper').show();
+
+		// 	$('#submenu-wrapper').stop().animate({
+		// 		'marginTop': '0.04em'
+		// 	});
+		// });
+
+		// $('#submenu-wrapper').mouseleave(function () {
+		// 	$('#submenu-wrapper').animate({
+		// 		'marginTop': '-27em'
+		// 	});
+		// });
+
+
+		// function slideMenu() {
+		// 	var activeState = $("#menu-container .menu-list").hasClass("active");
+
+		// 	if (activeState) {
+		// 		$("#menu-container .menu-list").show();
+		// 	}
+
+		// 	$("#menu-container .menu-list").animate({
+		// 		right: activeState ? "0%" : "-100%"
+		// 	}, 400, null, function () {
+		// 		if (!activeState) {
+		// 			$("#menu-container .menu-list").hide();
+		// 		}
+		// 	});
+		// }
+		// $("#menu-wrapper").click(function (event) {
+		// 	event.stopPropagation();
+		// 	$("#hamburger-menu").toggleClass("open");
+		// 	$("#menu-container .menu-list").toggleClass("active");
+		// 	slideMenu();
+
+		// 	$("body").toggleClass("overflow-hidden");
+		// });
+
+		// $(".menu-list").find(".accordion-toggle").click(function () {
+		// 	$(this).next().toggleClass("open").slideToggle("fast");
+		// 	$(this).toggleClass("active-tab").find(".menu-link").toggleClass("active");
+
+		// 	$(".menu-list .accordion-content").not($(this).next()).slideUp("fast").removeClass("open");
+		// 	$(".menu-list .accordion-toggle").not(jQuery(this)).removeClass("active-tab").find(
+		// 		".menu-link").removeClass("active");
+		// });
+
+		new WOW().init();
+		// const subs = document.getElementById('subs2');
+		// const sub_option = document.getElementsByClassName('sub_option');
+		// console.log(subs);
+		// subs.addEventListener('click', function(){
+		// 	if(sub_option[0].style.display == '') {
+
+		// 	sub_option[0].style.display = 'block';
+		// 	} else {
+		// 		sub_option[0].style.display = '';
+		// 	}
+		// });
+
+		// 	var toggleBtn = document.querySelector('#subs2.subs');
+		// 	toggleBtn.addEventListener('click', () => {
+		// 	document.querySelector('.sub_option').classList.toggle("option_active");
+		// });
+
+	// 	if (window.matchMedia("screen and (max-width: 940px)").matches) {
+	// 	var footerSideImg = document.getElementsByClassName('footer-side-img')[0];
+	// 	footerSideImg.setAttribute('src', '/public/user/main/푸터사이드767.png');
+	// }
+	});
 </script>
