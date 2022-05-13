@@ -93,10 +93,42 @@
 		content: "";
 	}
 
-	.back.flip-item {
-		text-align: center;
-		line-height: 30px;
-	}
+.back.flip-item {
+      text-align: center;
+      line-height: 30px;
+      /* 이미지 위에 글자 */
+      width: 100%;
+      /* margin: 10px auto; */
+      position: relative;
+
+   }
+
+   .user-wrap img {
+      width: 100%;
+      vertical-align: middle;
+   }
+
+   .app-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-family: 'ypseo';
+      text-align: center;
+      color: #ffffff;
+      /* font-weight: 600; */
+   }
+
+   .layoutImg {
+      display: block;
+      background: rgba(20, 21, 22, 0.445);
+      width: 100%;
+      height: 100%;
+      position: relative;
+      margin-bottom: -350px;
+   }
 
 	.backTitle{
 		font-size: 23px;
@@ -109,8 +141,28 @@
 		background-image: url('../../../public/user/main/footer2.png');
 		background-size: cover;
 	}
-
-
+	.new_img .logo {
+		width: auto;
+		height: 70px;
+		align-self: flex-end;
+	}
+	.work-title {
+		height: 100%;
+		font-size: 20px;
+		color: #222;
+		font-weight: 600;
+		letter-spacing: -0.4px;
+		line-height: 1.5;
+	}
+	.cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    padding: 40px 38px;
+	}
 </style>
 <script>
 	$(document).ready(function () {
@@ -231,68 +283,92 @@
 
 
 <div class="b_wrap">
-	<div class="busi_content_wrap">
-		<ul class="business_list">
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">앱(APP) 개발</p>
-						<p class="subTitleEng">android/ios app</p>
-						<div class="img_wrap">
-							<!-- <img src="/public/user/main/구글스토어.png" alt="구글스토어" class= />
-							<img src="/public/user/main/앱스토어.png" alt="앱스토어" /> -->
-							<img src="/public/user/main/앱개발아이콘.png" alt="">
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item"><p class="backTitle">앱(APP) 개발</p>
-						<p class="subTitleEng">android/ios app</p><br>
-						Android 앱 개발 <br>iOS 앱 개발 <br>플랫폼 기획 및 설계</div>
-			</div>	
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">웹(WEB) 구축</p>
-						<p class="subTitleEng">responsive web</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/web.png" alt="웹구축" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item"><p class="backTitle">웹(WEB) 구축</p>
-						<p class="subTitleEng">responsive web</p><br>
-						반응형 홈페이지 구축 <br>데이터베이스 구축 <br>빅데이터 구축</div>
-			</div>
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">AI 기반 기술개발</p>
-						<p class="subTitleEng">ai bigdata</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/bigdata.png" alt="빅데이터분석" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item"><p class="backTitle">AI 기반 기술개발</p>
-						<p class="subTitleEng">ai bigdata</p><br>
-						AI 대화형 챗봇 <br>자동 객체인식 검출기 <br>딥러닝 학습 모델</div>
-			</div>
-			<div class="flip">
-				<li class="front flip-item">
-					<a href="javascript:void(0);">
-						<p class="title">XR 콘텐츠 구현</p>
-						<p class="subTitleEng">metaverse</p>
-						<div class="img_wrap">
-							<img src="/public/user/main/metaverse.png" alt="메타버스" />
-						</div>
-					</a>
-				</li>
-				<div class="back flip-item"><p class="backTitle">XR 콘텐츠 구현</p>
-						<p class="subTitleEng">metaverse</p><br>
-						실감형 플랫폼 구축<br>가상현실 콘텐츠 제작<br>게임콘텐츠제작</div>
-			</div>
-		</ul>
-	</div>
+   <div class="busi_content_wrap">
+      <ul class="business_list">
+         <div class="flip">
+            <li class="front flip-item">
+               <a href="javascript:void(0);">
+                  <p class="title">앱(APP) 개발</p>
+                  <p class="subTitleEng">android/ios app</p>
+                  <div class="img_wrap">
+                     <!-- <img src="/public/user/main/구글스토어.png" alt="구글스토어" class= />
+                     <img src="/public/user/main/앱스토어.png" alt="앱스토어" /> -->
+                     <img src="/public/user/main/앱개발아이콘.png" alt="">
+                  </div>
+               </a>
+            </li>
+            <div class="back flip-item">
+               <a href="" class="layoutImg"></a>
+               <img src="/public/user/main/앱개발.jpg" style="height: 100%; width: 100%">
+               <div class="app-text">
+                  <!-- <p class="backTitle">앱(APP) 개발</p>
+                  <p class="subTitleEng">android/ios app</p><br> -->
+                  Android 앱 개발 <br>iOS 앱 개발 <br>플랫폼 기획 및 설계
+               </div>
+            </div>
+         </div>
+         <div class="flip">
+            <li class="front flip-item">
+               <a href="javascript:void(0);">
+                  <p class="title">웹(WEB) 구축</p>
+                  <p class="subTitleEng">responsive web</p>
+                  <div class="img_wrap">
+                     <img src="/public/user/main/web.png" alt="웹구축" />
+                  </div>
+               </a>
+            </li>
+            <div class="back flip-item">
+               <a href="" class="layoutImg"></a>
+               <img src="/public/user/main/웹구축.jpg" style="height: 100%; width: 100%">
+               <!-- <p class="backTitle">웹(WEB) 구축</p>
+               <p class="subTitleEng">responsive web</p><br> -->
+               <div class="app-text">
+                  반응형 홈페이지 구축 <br>데이터베이스 구축 <br>빅데이터 구축
+               </div>
+            </div>
+         </div>
+         <div class="flip">
+            <li class="front flip-item">
+               <a href="javascript:void(0);">
+                  <p class="title">AI 기반 기술개발</p>
+                  <p class="subTitleEng">ai bigdata</p>
+                  <div class="img_wrap">
+                     <img src="/public/user/main/bigdata.png" alt="빅데이터분석" />
+                  </div>
+               </a>
+            </li>
+            <div class="back flip-item">
+               <a href="" class="layoutImg"></a>
+               <img src="/public/user/main/AI기술개발.jpg" style="height: 100%; width: 100%">
+               <!-- <p class="backTitle">AI 기반 기술개발</p>
+               <p class="subTitleEng">ai bigdata</p><br> -->
+               <div class="app-text">
+                  AI 대화형 챗봇 <br>자동 객체인식 검출기 <br>딥러닝 학습 모델
+               </div>
+            </div>
+         </div>
+         <div class="flip">
+            <li class="front flip-item">
+               <a href="javascript:void(0);">
+                  <p class="title">XR 콘텐츠 구현</p>
+                  <p class="subTitleEng">metaverse</p>
+                  <div class="img_wrap">
+                     <img src="/public/user/main/metaverse.png" alt="메타버스" />
+                  </div>
+               </a>
+            </li>
+            <div class="back flip-item">
+               <a href="" class="layoutImg"></a>
+               <img src="/public/user/main/XR콘텐츠.jpg" style="height: 100%; width: 100%">
+               <!-- <p class="backTitle">XR 콘텐츠 구현</p>
+               <p class="subTitleEng">metaverse</p><br> -->
+               <div class="app-text">
+                  실감형 플랫폼 구축<br>가상현실 콘텐츠 제작<br>게임콘텐츠제작
+               </div>
+            </div>
+         </div>
+      </ul>
+   </div>
 </div>
 
 
@@ -312,12 +388,9 @@
 			<% for(var i = 0; i < projectRes.length; i++){ %>
 			<div class="slide">
 				<a href="javascript:void(0);">
-					<div class="new_img">
-						<img style="height:540px" src="<%=projectRes[i].projectImg%>" alt="">
-					</div>
-					<div class="new_body">
-						<span class="cate">[<%=projectRes[i].projectType%>]</span>
-						<h3 class="news_tit"><%=projectRes[i].projectTitle%></h3>
+					<div class="new_img" style="height:300px; background-image: url(/public/user/main/액자.png); background-size:100% 100%;" >
+						<div class="cont"><p class="work-title"><%=projectRes[i].projectTitle%><br></p>		
+							<img class="logo" src="<%=projectRes[i].projectImg%>" alt="[<%=projectRes[i].projectType%>]"></div>
 					</div>
 				</a>
 			</div>
