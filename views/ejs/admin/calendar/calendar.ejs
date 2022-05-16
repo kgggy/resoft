@@ -14,11 +14,6 @@
     type="text/javascript"></script>
 
 <style>
-    body {
-        line-height: 14px;
-    }
-
-
     #calendar {
         max-width: 1100px;
         margin: 0 auto;
@@ -143,12 +138,63 @@
         width: 100%;
         background-color: #5ebe7f;
     }
+
+    .colorBox {
+        margin: 14px 0px 0px 144px;
+        width: 360px;
+        height: 45px;
+        font-size: 17px;
+        font-weight: 700;
+        border: 1px solid rgba(170, 162, 173, 0.295);
+    }
+
+    .dot1 {
+        height: 25px;
+        width: 25px;
+        background-color: #f07e88;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 10px 7px 10px 17px;
+    }
+
+    .dot2 {
+        height: 25px;
+        width: 25px;
+        background-color: #a994e3;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 10px 7px 10px 17px;
+    }
+
+    .dot3 {
+        height: 25px;
+        width: 25px;
+        background-color: #fff100;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 10px 7px 10px 17px;
+    }
+
+    .dot4 {
+        height: 25px;
+        width: 25px;
+        background-color: #52acea;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 10px 7px 10px 17px;
+    }
+
+    .child {
+        line-height: 30px;
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 <script type="text/javascript">
     var eventColor = '#f07e88'; //일정
     var workColor = '#a994e3'; //업무
-    var annualColor= '#fff100'; //승인 전 연차 #53ace4
+    var annualColor = '#fff100'; //승인 전 연차 #53ace4
     var approvalColor = '#5ebe7f'; //승인 후 연차
     var otherColor = '#52acea'; //기타
     var rejectColor = '#f83a22'; //반려 적색
@@ -164,7 +210,7 @@
         var eventselect;
         $.ajax({
             type: 'get',
-            url: '/admin/calendar/select',
+            url: '/admin/calendarSelect',
             async: false,
             dataType: 'json',
             success: function (data) {
@@ -176,24 +222,36 @@
         });
         var events = eventselect;
         var calendarEl = document.getElementById('calendar');
-        
-        for(i=0; i< events.length; i++) { //색깔 지정해주기
+
+        for (i = 0; i < events.length; i++) { //색깔 지정해주기
             var origin = events[i];
             var color;
-            var allDay = {allDay : true};
-            var textBlack = {textColor : "#000000"};
+            var allDay = {
+                allDay: true
+            }; //하루 일정도 길게 채우기
+            var textBlack = {
+                textColor: "#000000"
+            };
             if (events[i].calendarDiv == '일정') {
-                color = {color: eventColor};
+                color = {
+                    color: eventColor
+                };
                 Object.assign(origin, color, allDay);
             } else if (events[i].calendarDiv == '업무') {
-                color = {color: workColor};
+                color = {
+                    color: workColor
+                };
                 Object.assign(origin, color, allDay);
             } else if (events[i].calendarDiv == '연차') {
-                color = {color: annualColor};
+                color = {
+                    color: annualColor
+                };
                 Object.assign(origin, color, allDay);
                 Object.assign(origin, textBlack);
             } else if (events[i].calendarDiv == '기타') {
-                color = {color: otherColor};
+                color = {
+                    color: otherColor
+                };
                 Object.assign(origin, color, allDay);
             }
         }
@@ -214,9 +272,11 @@
                             var content = $("#calendar_content").val();
                             var start_date = $("#calendar_start_date").val();
                             var end_date = $("#calendar_end_date").val();
-
+                            var div = $("#calendar_div").val();
                             //내용 입력 여부 확인
-                            if (content == null || content == "") {
+                            if (div == null || div == "") {
+                                alert("구분을 선택하세요.");
+                            } else if (content == null || content == "") {
                                 alert("내용을 입력하세요.");
                             } else if (start_date == "" || end_date == "") {
                                 alert("날짜를 입력하세요.");
@@ -227,19 +287,22 @@
                                 var obj = {
                                     "title": content,
                                     "start": start_date,
-                                    "end": end_date
+                                    "end": end_date,
+                                    "div": div
                                 } //전송할 객체 생성
 
                                 // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                                 $.ajax({
                                     type: 'post',
-                                    url: '/admin/calendar/insert',
+                                    url: '/admin/calendarInsert',
                                     data: {
                                         obj: obj
                                     },
                                     dataType: 'json',
                                     success: function (data) {
-                                        eventselect = data.results
+                                        $("#calendarModal").modal("hide");
+                                        alert("일정 등록이 완료되었습니다.");
+                                        location.reload();
                                     },
                                     error: function (e) {
                                         console.log('error:' + e.status);
@@ -250,57 +313,62 @@
                     }
                 }
             },
-            dateClick: function (info) { //날짜 클릭하면 일정등록
-                // alert('a day has been clicked!' + info.dateStr);
-                $("#calendarModal").modal("show");
-                $("#calendar_start_date").attr('value', info.dateStr);
-                $("#calendar_end_date").attr('value', info.dateStr);
+            // dateClick: function (info) { //날짜 클릭하면 일정등록
+            //     // alert('a day has been clicked!' + info.dateStr);
+            //     $("#calendarModal").modal("show");
+            //     //해당 날짜
+            //     $("#calendar_start_date").attr('value', info.dateStr);
+            //     $("#calendar_end_date").attr('value', info.dateStr);
 
-                $("#addCalendar").on("click", function () { // modal의 추가 버튼 클릭 시
-                    var content = $("#calendar_content").val();
-                    var start_date = $("#calendar_start_date").val();
-                    var end_date = $("#calendar_end_date").val();
-                    //내용 입력 여부 확인
-                    if (content == null || content == "") {
-                        alert("내용을 입력하세요.");
-                    } else if (start_date == "" || end_date == "") {
-                        alert("날짜를 입력하세요.");
-                    } else if (new Date(end_date) - new Date(start_date) <
-                        0) { // date 타입으로 변경 후 확인
-                        alert("종료일이 시작일보다 먼저입니다.");
-                    } else { // 정상적인 입력 시
-                        var obj = {
-                            "title": content,
-                            "start": start_date,
-                            "end": end_date
-                        } //전송할 객체 생성
+            //     $("#addCalendar").on("click", function () { // modal의 추가 버튼 클릭 시
+            //         var content = $("#calendar_content").val();
+            //         var start_date = $("#calendar_start_date").val();
+            //         var end_date = $("#calendar_end_date").val();
+            //         var div = $("#calendar_div").val();
+            //         //내용 입력 여부 확인
+            //         if (div == null || div == "") {
+            //                     alert("구분을 선택하세요.");
+            //                 } else if (content == null || content == "") {
+            //             alert("내용을 입력하세요.");
+            //         } else if (start_date == "" || end_date == "") {
+            //             alert("날짜를 입력하세요.");
+            //         } else if (new Date(end_date) - new Date(start_date) <
+            //             0) { // date 타입으로 변경 후 확인
+            //             alert("종료일이 시작일보다 먼저입니다.");
+            //         } else { // 정상적인 입력 시
+            //             var obj = {
+            //                 "title": content,
+            //                 "start": start_date,
+            //                 "end": end_date,
+            //                 "div": div
+            //             } //전송할 객체 생성
 
-                        // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
-                        $.ajax({
-                            type: 'post',
-                            url: '/admin/calendar/insert',
-                            data: {
-                                obj: obj
-                            },
-                            dataType: 'json',
-                            success: function () {
-                                $("#calendarModal").modal("hide");
-                                alert("일정 등록이 완료되었습니다.");
-                                location.reload();
-                            },
-                            error: function (e) {
-                                console.log('error:' + e.status);
-                            }
-                        });
-                    }
-                });
-            },
+            //             // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
+            //             $.ajax({
+            //                 type: 'post',
+            //                 url: '/admin/calendar/insert',
+            //                 data: {
+            //                     obj: obj
+            //                 },
+            //                 dataType: 'json',
+            //                 success: function () {
+            //                     $("#calendarModal").modal("hide");
+            //                     alert("일정 등록이 완료되었습니다.");
+            //                     location.reload();
+            //                 },
+            //                 error: function (e) {
+            //                     console.log('error:' + e.status);
+            //                 }
+            //             });
+            //         }
+            //     });
+            // },
             eventClick: function (arg) { // 이벤트 클릭 시
                 // console.log(arg)
                 var id = arg.event._def.extendedProps.calendarId //해당 이벤트 아이디 가져오기
                 $.ajax({
                     type: 'get',
-                    url: '/admin/calendar/selectOne',
+                    url: '/admin/calendarSelectOne',
                     data: {
                         calendarId: id
                     },
@@ -328,7 +396,7 @@
                             } else if (start_date == "" || end_date == "") {
                                 alert("날짜를 입력하세요.");
                             } else if (new Date(end_date) - new Date(
-                                start_date) <
+                                    start_date) <
                                 0) { // date 타입으로 변경 후 확인
                                 alert("종료일이 시작일보다 먼저입니다.");
                             } else { // 정상적인 입력 시
@@ -338,14 +406,13 @@
                                         "title": content,
                                         "start": start_date,
                                         "end": end_date,
-                                        "div": div,
-                                        "allDat": true
+                                        "div": div
                                     } //전송할 객체 생성
 
                                     // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                                     $.ajax({
                                         type: 'post',
-                                        url: '/admin/calendar/update',
+                                        url: '/admin/calendarUpdate',
                                         data: {
                                             obj: obj
                                         },
@@ -354,7 +421,8 @@
                                             $("#udtcalendarModal")
                                                 .modal("hide");
                                             alert(
-                                            "일정 수정이 완료되었습니다.");
+                                                "일정 수정이 완료되었습니다."
+                                            );
                                             location.reload();
                                         },
                                         error: function (e) {
@@ -366,29 +434,29 @@
                             }
                         });
                         $("#deleteCalendar").on("click",
-                    function () { // modal의 삭제 버튼 클릭 시
-                            // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
-                            if (confirm("일정을 삭제하시겠습니까?") == true) {
-                                $.ajax({
-                                    type: 'get',
-                                    url: '/admin/calendar/delete',
-                                    data: {
-                                        calendarId: id
-                                    },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $("#udtcalendarModal")
-                                            .modal("hide");
-                                        alert("일정이 삭제되었습니다.");
-                                        location.reload();
-                                    },
-                                    error: function (e) {
-                                        console.log('error:' + e
-                                            .status);
-                                    }
-                                });
-                            }
-                        });
+                            function () { // modal의 삭제 버튼 클릭 시
+                                // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
+                                if (confirm("일정을 삭제하시겠습니까?") == true) {
+                                    $.ajax({
+                                        type: 'get',
+                                        url: '/admin/calendarDelete',
+                                        data: {
+                                            calendarId: id
+                                        },
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            $("#udtcalendarModal")
+                                                .modal("hide");
+                                            alert("일정이 삭제되었습니다.");
+                                            location.reload();
+                                        },
+                                        error: function (e) {
+                                            console.log('error:' + e
+                                                .status);
+                                        }
+                                    });
+                                }
+                            });
                     },
                     error: function (e) {
                         console.log('error:' + e.status);
@@ -400,11 +468,16 @@
                 // console.log(arg)
                 var id = arg.event._def.extendedProps.calendarId
                 const startDate = arg.event._instance.range.start;
-                const endDate = arg.event._instance.range.end;
+
+                var endStr = new Date(arg.event._instance.range.end); // 끝날짜 하루 빼주기
+                const yesterday = new Date(endStr.setDate(endStr.getDate() - 1));
+                const endDate = moment(yesterday);
+                // console.log(yesterday)
+
                 if (confirm("날짜를 변경하시겠습니까?") == true) {
                     $.ajax({
                         type: 'get',
-                        url: '/admin/calendar/dateUpdate',
+                        url: '/admin/calendarUpdate/date',
                         data: {
                             calendarId: id,
                             start: startDate.toISOString(),
@@ -452,13 +525,13 @@
                             "title": content,
                             "start": start_date,
                             "end": end_date,
-                            "calendarDiv": div
+                            "div": div
                         } //전송할 객체 생성
 
                         // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                         $.ajax({
                             type: 'post',
-                            url: '/admin/calendar/insert',
+                            url: '/admin/calendarInsert',
                             data: {
                                 obj: obj
                             },
@@ -512,8 +585,12 @@
 </div> 
 <br/>-->
 <div id="calendarBox">
-    <div id="calendar"></div>
-    <div></div>
+    <div id="calendar"> </div>
+    <div class="colorBox">
+        <div class="child">
+            <span class="dot1"></span>일정<span class="dot2"></span>업무<span
+                class="dot3"></span>연차<span class="dot4"></span>기타</div>
+    </div>
 </div>
 
 <!-- modal 추가 -->

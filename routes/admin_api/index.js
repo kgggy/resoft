@@ -17,14 +17,19 @@ const boardSelectOne = require('./board/boardSelectOne.js');
 const boardInsert = require('./board/boardInsert.js');
 const boardUpdate = require('./board/boardUpdate.js');
 const boardDelete = require('./board/boardDelete.js');
-const calendar = require('./calendar.js');
 
-router.use('/', (req,res,next) => {
-    if(req.url == '/' || req.url == '/login') {
+const calendarSelect = require('./calendar/calendarSelect.js');
+const calendarSelectOne = require('./calendar/calendarSelectOne.js');
+const calendarInsert = require('./calendar/calendarInsert.js');
+const calendarUpdate = require('./calendar/calendarUpdate.js');
+const calendarDelete = require('./calendar/calendarDelete.js');
+
+router.use('/', (req, res, next) => {
+    if (req.url == '/' || req.url == '/login') {
         // console.log("세션 검사 하지않고 로그인페이지로")
         next();
-    } else {                                            // 로그인 페이지 이외의 페이지에 진입하려고 하는 경우
-        if(req.session.user) {
+    } else { // 로그인 페이지 이외의 페이지에 진입하려고 하는 경우
+        if (req.session.user) {
             // console.log("세션이 있다.")
             next();
             // if(req.session.user.isAdmin) {
@@ -40,6 +45,18 @@ router.use('/', (req,res,next) => {
 });
 
 router.use('/', login);
+// router.use('/', (req, res, next) => {
+//     const sql = "select * from projectAdmin;";
+//     connection.query(sql, (err, results) => {
+//         if (err) {
+//             throw err;
+//         }
+//         let route = req.app.get('views') + '/ejs/admin/main.ejs';
+//         res.render(route, {
+//             results: results
+//         });
+//     });
+// });
 router.use('/main', main);
 
 router.use('/weekReport', weekReport);
@@ -54,6 +71,11 @@ router.use('/boardSelectOne', boardSelectOne);
 router.use('/boardInsert', boardInsert);
 router.use('/boardUpdate', boardUpdate);
 router.use('/boardDelete', boardDelete);
-router.use('/calendar', calendar);
+
+router.use('/calendarSelect', calendarSelect);
+router.use('/calendarSelectOne', calendarSelectOne);
+router.use('/calendarInsert', calendarInsert);
+router.use('/calendarUpdate', calendarUpdate);
+router.use('/calendarDelete', calendarDelete);
 
 module.exports = router;

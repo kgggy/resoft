@@ -1,45 +1,38 @@
-<nav
-          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-          id="layout-navbar"
-        >
-          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-              <i class="bx bx-menu bx-sm"></i>
-            </a>
-          </div>
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+  id="layout-navbar">
+  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+      <i class="bx bx-menu bx-sm"></i>
+    </a>
+  </div>
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <!-- Search -->
-            <!-- <div class="navbar-nav align-items-center">
-              <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input
-                  type="text"
-                  class="form-control border-0 shadow-none"
-                  placeholder="Search..."
-                  aria-label="Search..."
-                />
-              </div>
-            </div> -->
-            <!-- /Search -->
+  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <!-- Search -->
+    <div class="navbar-nav align-items-center">
+      <div class="nav-item d-flex align-items-center">
+        <i class="bx bx-search fs-4 lh-0"></i>
+        <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+      </div>
+    </div>
+    <select name="targetType" class="dropdown">
+      <option value="" selected="selected">프로젝트명</option>
+      
+    </select>
+    <!-- /Search -->
 
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-              <!-- Place this tag where you want the button to render. -->
-                <form action="/admin/logout">
-              <div class="navbar-nav align-items-center">
-                  <% if(sessionId == "오유나"){%>
-                <strong><%=sessionId%> 대표님, 환영합니다!</strong>
-                <%}else{%>
-                <strong><%=sessionId%> 관리자님, 환영합니다!</strong>
-                <%}%>
-                  <button style="border:none; color: #20a8d8; background-color: transparent; outline: none;">
-                    로그아웃
-                  </button>
-                </div>
-              </form>
+    <ul class="navbar-nav flex-row align-items-center ms-auto">
+      <!-- Place this tag where you want the button to render. -->
+      <form action="/admin/logout">
+        <div class="navbar-nav align-items-center">
 
-              <!-- User -->
-              <!-- <li class="nav-item navbar-dropdown dropdown-user dropdown">
+          <button style="border:none; color: #20a8d8; background-color: transparent; outline: none;">
+            로그아웃
+          </button>
+        </div>
+      </form>
+
+      <!-- User -->
+      <!-- <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
                     <img src="../../public/sneat/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -96,7 +89,7 @@
                   </li>
                 </ul>
               </li> -->
-              <!--/ User -->
-            </ul>
-          </div>
-        </nav>
+      <!--/ User -->
+    </ul>
+  </div>
+</nav>
