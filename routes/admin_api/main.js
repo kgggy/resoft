@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const models = require('../../models');
 var connection = require('../../config/db').conn;
 
 //메인 페이지
