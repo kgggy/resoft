@@ -8,10 +8,14 @@
  <% } else {%>
          <input type="date" name="searchType1" value="" />
 <% } %>
-<% if(searchText != '') { %> <input class="searchbox" type="text" name="searchText" value="<%=searchText%>" />
-            <% } else {%>
-            <input class="searchbox" type="text" name="searchText" placeholder="사원 이름" />
-            <% } %>
+        <select name="searchText" class="dropdown">
+            <option value="">사원이름</option>
+            <option value="권가영" <%if(searchText=="권가영"){%> selected="selected" <%}%>>권가영</option>
+            <option value="박용진" <%if(searchText=="박용진"){%> selected="selected" <%}%>>박용진</option>
+            <option value="서보경" <%if(searchText=="서보경"){%> selected="selected" <%}%>>서보경</option>
+            <option value="정의영" <%if(searchText=="정의영"){%> selected="selected" <%}%>>정의영</option>
+            <option value="김진성" <%if(searchText=="김진성"){%> selected="selected" <%}%>>김진성</option>
+        </select>
             <button class="btn btn-primary" type="submit" id="searchAction" style="margin-bottom: 10px;">검색</button>
     </form>
     <!-- Basic Bootstrap Table -->

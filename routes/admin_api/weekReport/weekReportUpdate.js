@@ -61,7 +61,8 @@ router.post('/', async (req, res) => {
     var page = req.body.page;
     var searchType1 = req.body.searchType1 == undefined ? "" : req.body.searchType1;
     var searchText = req.body.searchText == undefined ? "" : req.body.searchText;
-    var sql = "update weekReport set report=?, nextPlan=?, note=?";
+    var weekReportId = req.body.weekReportId
+    var sql = "update weekReport set report=?, nextPlan=?, note=? where weekReportId = ?";
 
     var report = req.body.report;
     var lastReport = [];
@@ -84,7 +85,7 @@ router.post('/', async (req, res) => {
         lastNextPlan.push(nextPlan);
     }
 
-    const param = [lastReport.toString(), lastNextPlan.toString(), req.body.note];
+    const param = [lastReport.toString(), lastNextPlan.toString(), req.body.note, weekReportId];
     try {
         connection.query(sql, param, function (err) {
             if (err) {

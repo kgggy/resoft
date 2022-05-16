@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
             sql += " and date_format(w.reportDate, '%Y-%m-%d') = '" + searchType1 + "' \n";
         }
         if (searchText != '') {
-            sql += " and (a.adminNick like '%" + searchText + "%')";
+            sql += " and a.adminNick  = '" + searchText + "'";
         }
     sql += " order by 1 desc";
     
