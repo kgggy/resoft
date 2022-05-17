@@ -221,7 +221,7 @@
         var eventselect;
         $.ajax({
             type: 'get',
-            url: '/admin/calendarSelect',
+            url: '/admin/pjCalendarSelect',
             async: false,
             data: {
                 upperDiv: upperDiv
@@ -308,7 +308,7 @@
                                 // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                                 $.ajax({
                                     type: 'post',
-                                    url: '/admin/calendarInsert',
+                                    url: '/admin/pjCalendarInsert',
                                     data: {
                                         obj: obj
                                     },
@@ -382,7 +382,7 @@
                 var id = arg.event._def.extendedProps.calendarId //해당 이벤트 아이디 가져오기
                 $.ajax({
                     type: 'get',
-                    url: '/admin/calendarSelectOne',
+                    url: '/admin/pjCalendarSelectOne',
                     data: {
                         calendarId: id
                     },
@@ -426,7 +426,7 @@
                                     // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                                     $.ajax({
                                         type: 'post',
-                                        url: '/admin/calendarUpdate',
+                                        url: '/admin/pjCalendarUpdate',
                                         data: {
                                             obj: obj
                                         },
@@ -453,7 +453,7 @@
                                 if (confirm("일정을 삭제하시겠습니까?") == true) {
                                     $.ajax({
                                         type: 'get',
-                                        url: '/admin/calendarDelete',
+                                        url: '/admin/pjCalendarDelete',
                                         data: {
                                             calendarId: id
                                         },
@@ -491,7 +491,7 @@
                 if (confirm("날짜를 변경하시겠습니까?") == true) {
                     $.ajax({
                         type: 'get',
-                        url: '/admin/calendarUpdate/date',
+                        url: '/admin/pjCalendarUpdate/date',
                         data: {
                             calendarId: id,
                             start: startDate.toISOString(),
@@ -545,7 +545,7 @@
                         // console.log(obj); //서버로 해당 객체를 전달해서 DB 연동 가능
                         $.ajax({
                             type: 'post',
-                            url: '/admin/calendarInsert',
+                            url: '/admin/pjCalendarInsert',
                             data: {
                                 obj: obj
                             },
@@ -600,11 +600,6 @@
 <br/>-->
 <div id="calendarBox">
     <div id="calendar"> </div>
-    <div class="colorBox">
-        <div class="child">
-            <span class="dot1"></span>일정<span class="dot2"></span>업무<span class="dot3"></span>연차<span
-                class="dot4"></span>기타</div>
-    </div>
 </div>
 
 <!-- modal 추가 -->

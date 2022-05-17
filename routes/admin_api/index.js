@@ -24,25 +24,31 @@ const calendarInsert = require('./calendar/calendarInsert.js');
 const calendarUpdate = require('./calendar/calendarUpdate.js');
 const calendarDelete = require('./calendar/calendarDelete.js');
 
-router.use('/', (req, res, next) => {
-    if (req.url == '/' || req.url == '/login') {
-        // console.log("세션 검사 하지않고 로그인페이지로")
-        next();
-    } else { // 로그인 페이지 이외의 페이지에 진입하려고 하는 경우
-        if (req.session.user) {
-            // console.log("세션이 있다.")
-            next();
-            // if(req.session.user.isAdmin) {
-            //     next();
-            // } else {
-            //     res.send("<script>alert('어드민 계정으로 로그인 해주세요');location.href='/admin'</script>");
-            // }                            // user와 admin이 같은 페이지를 이용할 때 구분해줘야 할 때
-        } else {
-            // console.log("세션이 없다.")
-            res.send("<script>alert('로그인이 필요합니다.');location.href='/admin'</script>");
-        }
-    }
-});
+const pjCalendarSelect = require('./projectCalendar/calendarSelect.js');
+const pjCalendarSelectOne = require('./projectCalendar/calendarSelectOne.js');
+const pjCalendarInsert = require('./projectCalendar/calendarInsert.js');
+const pjCalendarUpdate = require('./projectCalendar/calendarUpdate.js');
+const pjCalendarDelete = require('./projectCalendar/calendarDelete.js');
+
+// router.use('/', (req, res, next) => {
+//     if (req.url == '/' || req.url == '/login') {
+//         // console.log("세션 검사 하지않고 로그인페이지로")
+//         next();
+//     } else { // 로그인 페이지 이외의 페이지에 진입하려고 하는 경우
+//         if (req.session.user) {
+//             // console.log("세션이 있다.")
+//             next();
+//             // if(req.session.user.isAdmin) {
+//             //     next();
+//             // } else {
+//             //     res.send("<script>alert('어드민 계정으로 로그인 해주세요');location.href='/admin'</script>");
+//             // }                            // user와 admin이 같은 페이지를 이용할 때 구분해줘야 할 때
+//         } else {
+//             // console.log("세션이 없다.")
+//             res.send("<script>alert('로그인이 필요합니다.');location.href='/admin'</script>");
+//         }
+//     }
+// });
 
 router.use('/', login);
 // router.use('/', (req, res, next) => {
@@ -77,5 +83,11 @@ router.use('/calendarSelectOne', calendarSelectOne);
 router.use('/calendarInsert', calendarInsert);
 router.use('/calendarUpdate', calendarUpdate);
 router.use('/calendarDelete', calendarDelete);
+
+router.use('/pjCalendarSelect', pjCalendarSelect);
+router.use('/pjCalendarSelectOne', pjCalendarSelectOne);
+router.use('/pjCalendarInsert', pjCalendarInsert);
+router.use('/pjCalendarUpdate', pjCalendarUpdate);
+router.use('/pjCalendarDelete', pjCalendarDelete);
 
 module.exports = router;
