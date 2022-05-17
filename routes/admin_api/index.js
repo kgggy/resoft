@@ -24,6 +24,9 @@ const calendarInsert = require('./calendar/calendarInsert.js');
 const calendarUpdate = require('./calendar/calendarUpdate.js');
 const calendarDelete = require('./calendar/calendarDelete.js');
 
+const project = require('./project/project.js');
+const projectOne = require('./project/projectOne.js');
+
 router.use('/', (req, res, next) => {
     if (req.url == '/' || req.url == '/login') {
         // console.log("세션 검사 하지않고 로그인페이지로")
@@ -77,5 +80,8 @@ router.use('/calendarSelectOne', calendarSelectOne);
 router.use('/calendarInsert', calendarInsert);
 router.use('/calendarUpdate', calendarUpdate);
 router.use('/calendarDelete', calendarDelete);
+
+router.use('/project', project);
+router.use('/projectOne', projectOne);
 
 module.exports = router;
