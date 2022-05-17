@@ -1,0 +1,101 @@
+<style>
+    .card{
+        color: black;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    .row {
+        --bs-gutter-x: auto;
+    }
+    .card::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
+    #report {
+        white-space: pre-wrap;
+    }
+    .table-responsive {
+        overflow-x: unset;
+    }
+    #divider-text{
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    #reportDate{
+        font-size: 1.5rem;
+        text-decoration: underline;
+    }
+    #reportLabel{
+        font-size: 2.0rem;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    #report{
+        font-size: 1.4rem;
+    }
+    #reportborder{
+        border: 2px solid black;
+    }
+    #note{
+        font-size:1.3rem;
+        color: blue;
+    }
+</style>
+
+<h4 class="fw-bold py-3 mb-4">리소프트 프로젝트</h4>
+<div style="background-color: #ededfa; padding: 30;">
+
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+        <!-- <h5 class="card-header">일반회원관리</h5> -->
+        <div class="table-responsive text-nowrap">
+            <form id="userForm" name="userForm" action="" method="">
+                <input type="hidden" id="weekReportId" name="weekReportId" value="" />
+                <div class="mb-3 row">
+                    <div class="card-body">
+                        <div class="divider">
+                            <div class="divider-text" id="divider-text"> 프로젝트 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10" id="reportDate">
+                       프로젝트명 : <%=result[0].projectName%>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10" id="reportDate">
+                       프로젝트 종류 : <%if(result[0].projectType == 0){%>
+                                        회원수첩<%}else if(result[0].projectType == 1){%>
+                                            ESC<%}else if(result[0].projectType == 2){%>
+                                            ESG<%}%>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10" id="reportDate">
+                       프로젝트 주소 : <%=result[0].projectDomain%>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10" id="reportDate">
+                       프로젝트 내용 : <%=result[0].projectContent%>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/ Basic Bootstrap Table -->
+    <div>
+
+    </div>
+</div>
+
+<script>
+    
+</script>

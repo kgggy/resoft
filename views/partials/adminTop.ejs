@@ -10,13 +10,12 @@
     <!-- Search -->
     <div class="navbar-nav align-items-center">
       <div class="nav-item d-flex align-items-center">
+        <input type="text" class="form-control border-0 shadow-none" placeholder="프로젝트명..." aria-label="프로젝트명..." />
         <i class="bx bx-search fs-4 lh-0"></i>
-        <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
       </div>
     </div>
-    <select name="targetType" class="dropdown">
-      <option value="" selected="selected">프로젝트명</option>
-      
+    <select name="targetType" class="dropdown" id="selectBox" name="selectBox" onchange="changeProject()">
+      <option value="">프로젝트명</option>
     </select>
     <!-- /Search -->
 
@@ -93,3 +92,34 @@
     </ul>
   </div>
 </nav>
+<script>
+  projectName();
+function projectName(){
+ fetch("project/projectName",{
+       method: "POST",
+               headers: {
+                  "Content-Type": "application/json",
+                  'Accept': 'application/json',
+               },
+            }).then((response) => response.json())
+            .then(function (data) {
+              let selectEl = document.querySelector("#selectBox"); 
+              var result = data.datas;
+              for(var test of result){
+              var objOption = document.createElement("option"); 
+              objOption.id = test.projectId
+              objOption.value = test.projectName; 
+              objOption.text = test.projectName; 
+              selectEl.options.add(objOption);
+              }
+            });
+}
+
+function changeProject(){ 
+  var projectSelect= document.getElementById("selectBox");
+  // select element에서 선택된 option의 value가 저장된다. 
+  var selectValue = projectSelect.options[projectSelect.selectedIndex].id;
+  console.log(selectValue)
+  window.location.href = "/admin/projectOne?projectId=" + selectValue;
+}
+</script>
