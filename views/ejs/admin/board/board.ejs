@@ -19,11 +19,13 @@
             <table class="table table-hove">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="chkAll" id="chkAll" /></th>
+                    <!-- <th><input type="checkbox" name="chkAll" id="chkAll" /></th> -->
                     <th>번호</th>
                     <th>제목</th>
                     <th>날짜</th>
+                    <th>작성자</th>
                     <th>댓글</th>
+                    <!-- <th>조회수</th> -->
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0" id="tbody">
@@ -36,9 +38,9 @@
                         <tr class="pointer"
                 onclick="location.href='/admin/boardSelectOne?boardDivId=<%=results[i].boardDivId%>&page=<%=page%>&searchText=<%=searchText%>&boardId=<%=results[i].boardId%>&boardName=<%=community[0].boardName%>'">
                 <% } %>
-            <td onclick='event.cancelBubble=true;'><input type="checkbox" id="chk" name="chk"
+            <!-- <td onclick='event.cancelBubble=true;'><input type="checkbox" id="chk" name="chk"
                     value="<%=results[i].boardId %>" />
-            </td>
+            </td> -->
             <td>
                 <%=results.length - i%>
             </td>
@@ -48,12 +50,13 @@
             <td>
                 <%= results[i].boardDatefmt %>
             </td>
-            <td onclick='event.cancelBubble=true;'>
-                <% if(results[i].mcount != 0) { %>
-                <button id="comment_btn" type="button"
-                    class="btn btn-info"
-                    onclick="comment('/admin/commentSelect', '', 'resizable=0,width=640, height=700, scrollbars=1', '<%= results[i].boardId %>')">댓글(<%=results[i].mcount %>)</button>
-                <% } %></td>
+            <td>
+                <%= results[i].adminNick %>
+            </td>
+            <td>
+              <%= results[i].mcount %></td>
+            <!-- <td>
+                <%= results[i].hitCount %></td> -->
             </tr>
             <% } %>
             <% } %>
@@ -70,10 +73,10 @@
 </div>
 </div>
 
-    <div style="margin-top: 30px;">
+    <div style="margin-top: 30px; margin-left: 20px;">
         <button id="enrollAction" class="btn btn-primary"
             onclick="location.href='/admin/boardInsert?boardDivId=<%=boardDivId %>&boardName=<%=community[0].boardName%>'">등록</button>
-        <button class="btn btn-danger" type="button" id="delete_btn">삭제</button>
+        <!-- <button class="btn btn-danger" type="button" id="delete_btn">삭제</button> -->
     </div>
 
 
@@ -188,9 +191,9 @@
                                     .page + '&searchText=' + data.searchText + '&boardDivId=' + 
                                     data.ajaxSearch[i].boardDivId +'">';
 
-                                str +=
-                                    '<td onclick="event.cancelBubble=true;"><input type="checkbox" id="chk" name="chk" value="' +
-                                    data.ajaxSearch[i].boardId + '" /> </td>';
+                                // str +=
+                                //     '<td onclick="event.cancelBubble=true;"><input type="checkbox" id="chk" name="chk" value="' +
+                                //     data.ajaxSearch[i].boardId + '" /> </td>';
                                 str +=
                                     '<td>' +
                                     (data.ajaxSearch.length - i) + '</td>';
@@ -200,13 +203,17 @@
                                 str +=
                                     '<td>' +
                                     data.ajaxSearch[i].boardDatefmt + '</td>';
-                                str += 
-                                    '<td onclick="event.cancelBubble=true;">';
-                                    if(data.ajaxSearch[i].mcount != 0) {
-                                        str += `<button id="comment_btn" type="button" class="btn btn-info" onclick="comment('/admin/commentSelect', '', 'resizable=0,width=640, height=700, scrollbars=1', '`+data.ajaxSearch[i].boardId+`')">댓글(`+data.ajaxSearch[i].mcount+`)</button>`;
-                                    } 
                                 str +=
-                                    '</td></tr>';
+                                '<td>' +
+                                data.ajaxSearch[i].adminNick + '</td>';
+                                str +=
+                                '<td>' +
+                                data.ajaxSearch[i].mcount + '</td>';
+                                // str += 
+                                // '<td>' +
+                                // data.ajaxSearch[i].hitCount + '</td>';
+                                str +=
+                                '</tr>';
                             }
                         }
                         $("#tbody").append(str);
