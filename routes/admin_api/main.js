@@ -31,10 +31,9 @@ router.get('/', async (req, res) => {
             if (last < endPage) {
                 endPage = last
             };
-            console.log(results);
+            // console.log(results);
             let route = req.app.get('views') + '/ejs/admin/main.ejs';
             res.render(route, {
-                sessionId: req.session.user.id,
                 searchType: searchType,
                 searchText: searchText,
                 results: results,
