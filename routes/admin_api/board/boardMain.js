@@ -24,7 +24,8 @@ router.get('/', async (req, res) => {
         var page = req.query.page;
         var searchText = req.query.searchText == undefined ? "" : req.query.searchText;
         var sql = "select b.*, c.*, a.adminNick, a.adminId, date_format(boardDate, '%Y-%m-%d') as boardDatefmt, date_format(boardUpdDate, '%Y-%m-%d') as boardUpdDatefmt\
-                    ,(select count(*) from comment c where c.boardId = b.boardId) as mcount from board b\
+                    ,(select count(*) from comment c where c.boardId = b.boardId) as mcount,\
+                    (select count(*) from hitCount where hitCount.boardId = b.boardId) as hitCount from board b\
                     left join boardDiv c on c.boardDivId = b.boardDivId\
                     left join admin a  on a.adminId = b.adminId\
                     where b.boardDivId = ?";

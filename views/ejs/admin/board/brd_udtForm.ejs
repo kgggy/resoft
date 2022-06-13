@@ -81,7 +81,7 @@
                               <% if(result[0].boardFix == 1){%>
                                  <input type="checkbox" style='zoom:3.0;' name="boardFix" value="1" checked>
                               <%}else{%>
-                                 <input type="checkbox" style='zoom:3.0;' name="boardFix" value="0">
+                                 <input type="checkbox" style='zoom:3.0;' name="boardFix" value="1">
                               <%}%>
                            </div>
                         </div>
@@ -146,7 +146,7 @@
          $('input[name=fileId').val($(this).attr('data-fileId'));
          $('input[name=fileRoute').val($(this).attr('data-fileRoute'));
          if (confirm("실제 파일이 삭제됩니다. 정말 삭제하시겠습니까?") == true) {
-            formObj.attr("action", "boardFileDelete");
+            formObj.attr("action", "boardDelete/boardFileDelete");
             formObj.attr("method", "get");
             alert("삭제되었습니다.");
             formObj.submit();

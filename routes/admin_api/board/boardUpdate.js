@@ -77,7 +77,6 @@ router.get('/', async (req, res) => {
 
 //게시글 수정
 router.post('/', upload.array('file'), (req, res) => {
-    console.log("aaaaaaaaaaaaa")
     const paths = req.files.map(data => data.path);
     const orgName = req.files.map(data => data.originalname);
     const boardFix = req.body.boardFix == undefined ? "0" : req.body.boardFix;
@@ -114,8 +113,8 @@ router.post('/', upload.array('file'), (req, res) => {
                 console.error(err);
             }
             for (let i = 0; i < paths.length; i++) {
-                const sql2 = "insert into file(fileRoute, fileOrgName, boardId) values (?, ?, ?)";
-                const param2 = [paths[i], orgName[i], req.body.boardId];
+                const sql2 = "insert into file(fileRoute, fileOrgName, boardId, fileType) values (?, ?, ?, ?)";
+                const param2 = [paths[i], orgName[i], req.body.boardId, path.extname(paths[i])];
                 connection.query(sql2, param2, (err) => {
                     if (err) {
                         throw err;

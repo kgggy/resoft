@@ -33,6 +33,9 @@ const pjCalendarDelete = require('./projectCalendar/calendarDelete.js');
 const project = require('./project/project.js');
 const projectOne = require('./project/projectOne.js');
 
+const cmtInsert = require('./comment/cmtInsert.js');
+const cmtDelete = require('./comment/cmtDelete.js');
+
 router.use('/', (req, res, next) => {
     if (req.url == '/' || req.url == '/login') {
         // console.log("세션 검사 하지않고 로그인페이지로")
@@ -96,5 +99,8 @@ router.use('/pjCalendarDelete', pjCalendarDelete);
 
 router.use('/project', project);
 router.use('/projectOne', projectOne);
+
+router.use('/cmtInsert', cmtInsert);
+router.use('/cmtDelete', cmtDelete);
 
 module.exports = router;

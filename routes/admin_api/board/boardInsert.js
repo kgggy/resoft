@@ -64,7 +64,7 @@ router.get('/', async (req, res) => {
 //공지사항 작성
 router.post('/', upload.array('file'), async (req, res, next) => {
     try {
-        var boardFix = req.body.boardFix == undefined ? "0" : req.query.boardFix;
+        var boardFix = req.body.boardFix == undefined ? "0" : req.body.boardFix;
         const paths = req.files.map(data => data.path);
         const orgName = req.files.map(data => data.originalname);
         const boardDivId = req.body.boardDivId;
