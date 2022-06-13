@@ -608,7 +608,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
+                <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.<%=g_projectId%></h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -691,3 +691,9 @@
 </div>
 
 <!-- </div> -->
+
+<script>
+    var projectSelect= document.getElementById("selectBox");
+    var selectValue = projectSelect.options[projectSelect.selectedIndex].id;
+    console.log(selectValue)
+</script>

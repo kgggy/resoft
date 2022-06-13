@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
                 throw err;
             }
             console.log(results)
+            console.log(g_projectId)
             res.send({
                 results
             });

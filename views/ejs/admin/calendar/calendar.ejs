@@ -193,7 +193,7 @@
 
 <script type="text/javascript">
     var eventColor = '#f07e88'; //일정
-    var workColor = '#a994e3'; //업무
+    var workColor = '#a994e3'; //당번
     var annualColor = '#fff100'; //승인 전 연차 #53ace4
     var approvalColor = '#5ebe7f'; //승인 후 연차
     var otherColor = '#52acea'; //기타
@@ -251,7 +251,7 @@
                     color: eventColor
                 };
                 Object.assign(origin, color, allDay);
-            } else if (events[i].calendarDiv == '업무') {
+            } else if (events[i].calendarDiv == '당번') {
                 color = {
                     color: workColor
                 };
@@ -391,11 +391,9 @@
                         // console.log(info.results[0].calendarDiv)
                         $("#udtCalendarModal").modal("show");
                         $("#udtcalendar_content").attr('value', info.results[0].title)
-                        $("#udtcalendar_start_date").attr('value', info.results[0]
-                            .start);
+                        $("#udtcalendar_start_date").attr('value', info.results[0].start);
                         $("#udtcalendar_end_date").attr('value', info.results[0].end);
-                        $('#udtcalendar_div option[value=' + info.results[0]
-                            .calendarDiv + ']').attr('selected', true);
+                        $('#udtcalendar_div option[value=' + info.results[0].calendarDiv + ']').attr('selected', true);
 
                         $("#udtCalendar").on("click", function () { // modal의 수정 버튼 클릭 시
                             var content = $("#udtcalendar_content").val();
@@ -602,7 +600,7 @@
     <div id="calendar"> </div>
     <div class="colorBox">
         <div class="child">
-            <span class="dot1"></span>일정<span class="dot2"></span>업무<span class="dot3"></span>연차<span
+            <span class="dot1"></span>일정<span class="dot2"></span>당번<span class="dot3"></span>연차<span
                 class="dot4"></span>기타</div>
     </div>
 </div>
@@ -626,7 +624,7 @@
                         <select id="calendar_div" name="calendar_div" class="dropdown">
                             <option value="">구분</option>
                             <option value="일정">일정</option>
-                            <option value="업무">업무</option>
+                            <option value="당번">당번</option>
                             <option value="연차">연차</option>
                             <option value="기타">기타</option>
                         </select>
@@ -669,7 +667,7 @@
                         <select id="udtcalendar_div" name="udtcalendar_div" class="dropdown">
                             <option value="">구분</option>
                             <option value="일정">일정</option>
-                            <option value="업무">업무</option>
+                            <option value="당번">당번</option>
                             <option value="연차">연차</option>
                             <option value="기타">기타</option>
                         </select>
