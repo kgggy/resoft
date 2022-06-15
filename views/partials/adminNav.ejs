@@ -3,7 +3,12 @@
 		font-size: 2.0rem;
 		font-weight: bolder;
 		color: black;
-		text-decoration: underline;
+	}
+	.menu-link{
+		border: 1px black solid;
+	}
+	.menu-item{
+		margin-bottom: 10px
 	}
 </style>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -86,31 +91,35 @@
 
 		<!-- 주간보고서 -->
 		<li class="menu-item">
-			<a href="/admin/project" class="menu-link">
+			<a href="/admin/project" class="menu-link" style="margin-bottom: 10px;">
 				<div data-i18n="Without menu" id="menuText">프로젝트 <br>기본정보</div>
 			</a>
 		</li>
 
+		<!-- <li class="menu-item">
+			<a href="/admin/pjCalendarSelect/main" class="menu-link" style="margin-bottom: 10px;">
+				<div data-i18n="Without menu" id="menuText">업무 달력</div>
+			</a>
+		</li> -->
 		<li class="menu-item">
-			<a href="/admin/pjCalendarSelect/main" class="menu-link">
+			<a href="/admin/calendarSelect/main" class="menu-link" style="margin-bottom: 10px;">
 				<div data-i18n="Without menu" id="menuText">업무 달력</div>
 			</a>
 		</li>
-
 		<li class="menu-item">
-			<a href="/admin/weekReport?page=1" class="menu-link">
+			<a href="/admin/weekReport?page=1" class="menu-link" style="margin-bottom: 10px;">
 				<div data-i18n="Without menu" id="menuText">주간보고서</div>
 			</a>
 		</li>
 
 		<li class="menu-item">
-			<a href="/admin/calendarSelect/main" class="menu-link">
+			<a href="/admin/calendarSelect/main" class="menu-link" style="margin-bottom: 10px;">
 				<div data-i18n="Without menu" id="menuText">사원 달력</div>
 			</a>
 		</li>
 
 		<li class="menu-item">
-			<a href="/admin/boardMain?page=1&boardDivId=1" class="menu-link">
+			<a href="/admin/boardMain?page=1&boardDivId=1" class="menu-link" style="margin-bottom: 10px;">
 				<div data-i18n="Without menu" id="menuText">기술 포럼</div>
 			</a>
 		</li>

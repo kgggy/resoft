@@ -76,8 +76,9 @@ router.get('/brdsDelete', (req, res) => {
             }
         });
         const sql = "delete from board where boardId = ?;\
-                        delete from file where boardId = ?;";
-        connection.query(sql, [str[i], str[i]], (err) => {
+                        delete from file where boardId = ?;\
+                            delete from comment where boardId = ?;";
+        connection.query(sql, [str[i], str[i], str[i]], (err) => {
             if (err) {
                 console.log(err)
             }
@@ -94,8 +95,9 @@ router.get('/brdDelete', async (req, res) => {
         var crewDiv = req.query.crewDiv;
         var boardDivId = req.query.boardDivId;
         const sql = "delete from board where boardId = ?;\
-                        delete from file where boardId = ?";
-        connection.query(sql, [param,param], (err) => {
+                        delete from file where boardId = ?;\
+                            delete from comment where boardId = ?;";
+        connection.query(sql, [param,param,param], (err) => {
             if (err) {
                 console.log(err);
             }
@@ -123,7 +125,8 @@ router.get('/brdDelete', async (req, res) => {
 //첨부파일 삭제
 router.get('/boardFileDelete', async (req, res) => {
     const param = req.query.fileId;
-    const fileRoute = req.query.fileRoute;
+    const fileRoute = req.query.fileRoute; 
+    console.log(param);
     try {
         const sql = "delete from file where fileId = ?";
         connection.query(sql, param, (err, row) => {

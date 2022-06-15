@@ -10,24 +10,29 @@ router.get('/', async (req, res) => {
         const page = req.query.page;
         const param = req.query.boardId;
         const boardDivId = req.query.boardDivId;
-        const sql = "select b.*,date_format(boardDate, '%Y-%m-%d') as boardDateFmt,\
+        const adminNick = req.session.user.id;
+        const sql = "select b.*,date_format(boardDate, '%Y-%m-%d') as boardDateFmt, a.adminNick,\
                             (select count(*) from hitCount where hitCount.boardId = b.boardId) as hitCount,\
-                            f.fileRoute from board b left join file f on b.boardId = f.boardId\
-                            where b.boardId = ?";
-
-        connection.query(sql, param, (err, result) => {
+                            f.fileRoute, f.fileType, f.fileOrgName from board b left join file f on b.boardId = f.boardId\
+                            left join admin a  on a.adminId = b.adminId\
+                            where b.boardId = ?;\
+                     select c.*, a.adminNick, a.adminId ,date_format(cmtDate, '%Y-%m-%d') as cmtDateFmt from comment c left join admin a on a.adminId = c.adminId where boardId = ?;";
+        
+        connection.query(sql, [param,param], (err, result) => {
             if (err) {
                 res.json({
                     msg: "select query error"
                 });
-            }
+            } 
             let route = req.app.get('views') + '/ejs/admin/board/brd_viewForm.ejs';
             res.render(route, {
-                result: result,
+                result: result[0],
+                cmtResult: result[1],
                 page: page,
                 searchText: searchText,
                 boardName: boardName,
-                boardDivId: boardDivId
+                boardDivId: boardDivId,
+                adminNick: adminNick
             });
         });
     } catch (error) {
