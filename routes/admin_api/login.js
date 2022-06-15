@@ -57,13 +57,13 @@ router.post('/login', async (req, res) => {
     })
     if (password == dbPwd.adminPwd) {
         if(req.session.user) {
-            res.redirect('/admin/main');
+            res.redirect('/admin/project');
         } else {                                    // 세션 없는 admin일 경우 만들어줌
             req.session.user = {
                 // isAdmin: true,           // user, admin 구분해주려고. admin 계정밖에 없으니까 필요없음.
                 id: adminNick
             };
-            res.redirect('/admin/main');
+            res.redirect('/admin/project');
         }
     } else {
         return res.send('<script>alert("아이디 또는 비밀번호를 잘못 입력했습니다."); location.href = document.referrer;</script>');
