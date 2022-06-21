@@ -176,6 +176,7 @@
                 },
                 dataType: 'json',
                 success: function (data) {
+                    // console.log(data)
                     var str = ''
                     $(".customPaging").empty();
                     if (data.ajaxSearch.length > 0) {
@@ -185,11 +186,16 @@
                                 i++;
                             } else {
                                 $("#tbody").empty();
-                                str +=
-                                    '<tr onclick="location.href=\'/admin/boardSelectOne?boardId=' +
-                                    data.ajaxSearch[i].boardId + '&page=' + data
-                                    .page + '&searchText=' + data.searchText + '&boardDivId=' + 
-                                    data.ajaxSearch[i].boardDivId +'">';
+                                if(data.ajaxSearch[i].boardFix == 1) {  
+                                    str += '<tr class="pointer" style="background-color: rgb(190 243 194);" onclick="location.href=\'/admin/boardSelectOne?boardDivId=' + data.ajaxSearch[i].boardDivId + '&page=' + data.page + '&searchText=' + data.searchText + '&boardId=' + data.ajaxSearch[i].boardId + '&boardName=' + data.ajaxSearch[i].boardName + '\'">';
+                                }else{ 
+                                    str += '<tr class="pointer" onclick="location.href=\'/admin/boardSelectOne?boardDivId=' + data.ajaxSearch[i].boardDivId + '&page=' + data.page + '&searchText=' + data.searchText + '&boardId=' + data.ajaxSearch[i].boardId + '&boardName=' + data.ajaxSearch[i].boardName + '\'">';
+                                }
+                                // str +=
+                                //     '<tr onclick="location.href=\'/admin/boardSelectOne?boardId=' +
+                                //     data.ajaxSearch[i].boardId + '&page=' + data
+                                //     .page + '&searchText=' + data.searchText + '&boardDivId=' + 
+                                //     data.ajaxSearch[i].boardDivId +'">';
 
                                 // str +=
                                 //     '<td onclick="event.cancelBubble=true;"><input type="checkbox" id="chk" name="chk" value="' +

@@ -55,7 +55,9 @@ router.get('/', async (req, res) => {
     try {
         const page = req.query.page;
         const boardId = req.query.boardId;
-        const boardName = req.query.boardName;
+        console.log(req.query.projectId)
+        const boardName = req.query.boardName == undefined ? '' : req.query.boardName;
+        const projectId = req.query.projectId == undefined ? null : req.query.projectId;
         const sql = "select b.*, f.* from board b left join file f on b.boardId = f.boardId where b.boardId = ?"
         let route = req.app.get('views') + '/ejs/admin/board/brd_udtForm.ejs';
         connection.query(sql, boardId, (err, result) => {
@@ -66,8 +68,8 @@ router.get('/', async (req, res) => {
                 result: result,
                 page: page,
                 boardName: boardName,
-                boardId: boardId
-
+                boardId: boardId,
+                projectId: projectId
             });
         });
     } catch (error) {
@@ -90,8 +92,8 @@ router.post('/', upload.array('file'), (req, res) => {
             if (req.files[i].mimetype == "image/jpeg" || req.files[i].mimetype == "image/jpg" || req.files[i].mimetype == "image/png") {
                 if (req.files[i].size > 1000000) {
                     sharp(paths[i]).resize({
-                        width: 2000
-                    }).withMetadata() //이미지 방향 유지
+                            width: 2000
+                        }).withMetadata() //이미지 방향 유지
                         .toBuffer((err, buffer) => {
                             if (err) {
                                 throw err;
@@ -107,7 +109,7 @@ router.post('/', upload.array('file'), (req, res) => {
         }
         const param = [req.body.boardTitle, req.body.boardContent, boardFix, req.body.boardId];
         const sql = "update board set boardTitle = ?, boardContent = ?, boardFix = ? where boardId = ?";
-        
+
         connection.query(sql, param, (err) => {
             if (err) {
                 console.error(err);
@@ -121,9 +123,13 @@ router.post('/', upload.array('file'), (req, res) => {
                     }
                 });
             };
-            res.redirect('boardSelectOne?boardId=' +
-                req.body.boardId + '&page=' + page + '&searchText=' + searchText
-                + '&boardName=' + boardName + '&boardDivId=' +boardDivId);
+            if (boardDivId != '') {
+                res.redirect('boardSelectOne?boardId=' +
+                    req.body.boardId + '&page=' + page + '&searchText=' + searchText +
+                    '&boardName=' + boardName + '&boardDivId=' + boardDivId);
+            } else {
+                res.send('<script>opener.parent.location.reload(); window.close(); </script>');
+            }
         });
     } catch (error) {
         res.send(error.message);

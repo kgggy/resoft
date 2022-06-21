@@ -24,8 +24,21 @@
    }
 
    #divider-text {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: bold;
+      color: black;
+      padding: 2.5rem 2.5rem;
+      padding-right: 15px;
+      padding-bottom: 0px;
+   }
+
+   #divider-text1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: black;
+      padding: 2.5rem 2.5rem;
+      padding-right: 15px;
+      padding-left: 25px;
    }
 
    .textarea {
@@ -58,22 +71,23 @@
 
    .plus {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
    }
 </style>
 <div class="col-xs-6">
-   <div class="mb-3 row">
+   <!-- <div class="mb-3 row">
       <div class="card-body">
          <div class="divider">
             <div class="divider-text" id="divider-text"> 리소프트 프로젝트 : <%=result[0].projectName%> </div>
          </div>
       </div>
-   </div>
+   </div> -->
    <!-- HTML5 Inputs -->
    <div class="card mb-4">
-      <h5 class="card-header">프로젝트 환경</h5>
+      <h5 class="card-header" id="divider-text1">프로젝트 환경</h5>
       <div class="card-body">
-         <form name="udtForm" role="form">
+         <form name="udtForm" method="post" role="form">
+            <input type="hidden" id="projectId" name="projectId" value="<%=result[0].projectId%>" />
             <!-- 컨텐츠 -->
             <div class="mb-3 row">
                <label class="col-md-2 col-form-label" for="text-input">프로젝트명</label>
@@ -154,6 +168,7 @@
                                     class="btn btn-block btn-outline-success textFileButton" type="button" download
                                     style="margin-left:20px">파일 다운로드</a>
                               </div>
+                              <input type="hidden" id="fileRoute" name="fileRoute" value="<%= result[i].fileRoute %>" />
                               <% } %>
                            </div>
                            <% }%>
@@ -174,14 +189,16 @@
          <div class="demo-inline-spacing" style="float: right;">
             <button type="button" class="btn btn-primary" id="update_btn" onclick="prjUpdate('/admin/projectUpdate', '', 'resizable=no,width=780, height=800, scrollbars=1',
             '<%= result[0].projectId %>')">수정</button>
+            <button type="button" class="btn btn-danger" id="delete_btn" onclick="projectDelete()">삭제</button>
             <button type="button" class="btn btn-dark" onclick="location.href='/admin/project'">목록</button>
          </div>
       </div>
    </div>
    <div class="card mb-4">
       <div class="plus">
-         <h5 class="card-header">클라이언트 정보</h5>
-         <a href="javascript:void(0);" onclick="clientInsert('/admin/projectInsert/client', '', 'resizable=no,width=1199, height=250, scrollbars=1', '<%= result[0].projectId %>')">
+         <h5 class="card-header" id="divider-text">클라이언트 정보</h5>
+         <a href="javascript:void(0);"
+            onclick="clientInsert('/admin/projectInsert/client', '', 'resizable=no,width=1199, height=250, scrollbars=1', '<%= result[0].projectId %>')">
             <i class='bx bxs-plus-circle bx-rotate-180' style='color:#696cff; font-size: 30px;'></i></a>
       </div>
       <div class="card-body">
@@ -211,8 +228,9 @@
    </div>
    <div class="card mb-4">
       <div class="plus">
-         <h5 class="card-header">히스토리</h5>
-         <a href="javascript:void(0);" onclick="historyInsert('/admin/projectInsert/history', '', 'resizable=no,width=780, height=800, scrollbars=1', '<%= result[0].projectId %>')">
+         <h5 class="card-header" id="divider-text">히스토리</h5>
+         <a href="javascript:void(0);"
+            onclick="historyInsert('/admin/projectInsert/history', '', 'resizable=no,width=780, height=800, scrollbars=1', '<%= result[0].projectId %>')">
             <i class='bx bxs-plus-circle bx-rotate-180' style='color:#696cff; font-size: 30px;'></i></a>
       </div>
       <div class="card-body">
@@ -239,6 +257,36 @@
          </form>
       </div>
    </div>
+   <div class="card mb-4">
+      <div class="plus">
+         <h5 class="card-header" id="divider-text">관련 자료 및 참고사항</h5>
+         <a href="javascript:void(0);"
+            onclick="boardInsert('/admin/boardInsert', '', 'resizable=no,width=780, height=800, scrollbars=1', '<%= result[0].projectId %>')">
+            <i class='bx bxs-plus-circle bx-rotate-180' style='color:#696cff; font-size: 30px;'></i></a>
+      </div>
+      <div class="card-body">
+         <form name="boardForm" role="form">
+            <input type="hidden" id="projectId" name="projectId" value="<%=result[0].projectId%>" />
+            <input type="hidden" name="boardId" value="" />
+            <div class="table-responsive text-nowrap">
+               <table class="table table-hove" style="height: 200px">
+                  <thead>
+                     <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성일자</th>
+                        <th>작성자</th>
+                        <th>비고</th>
+                     </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0" id="tbody2">
+
+                  </tbody>
+               </table>
+            </div>
+         </form>
+      </div>
+   </div>
 </div>
 
 <script type="text/javascript">
@@ -246,6 +294,7 @@
 
       var words = $("#projectId").val();
       // console.log(words);
+      //클라이언트
       $.ajax({
          type: 'get',
          url: '/admin/projectOne/client',
@@ -300,6 +349,7 @@
          }
       });
 
+      //히스토리
       $.ajax({
          type: 'get',
          url: '/admin/projectOne/history',
@@ -315,7 +365,8 @@
                   $("#tbody1").empty();
 
                   str +=
-                     '<tr class="pointer" onclick="historyView(\'/admin/projectOne/historyOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' + data
+                     '<tr class="pointer" onclick="historyView(\'/admin/projectOne/historyOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
+                     data
                      .ajaxSearch[i].historyId +
                      '\')">';
                   str +=
@@ -357,7 +408,81 @@
          }
       });
 
+      //관련 자료 및 참고사항
+      $.ajax({
+         type: 'get',
+         url: '/admin/projectOne/board',
+         data: {
+            projectId: words
+         },
+         dataType: 'json',
+         success: function (data) {
+            var str = ''
+            console.log(data)
+            if (data.ajaxSearch.length > 0) {
+               for (var i = 0; i < data.ajaxSearch.length; i++) {
+                  $("#tbody2").empty();
+
+                  str +=
+                     '<tr class="pointer" onclick="boardView(\'/admin/boardSelectOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
+                     data
+                     .ajaxSearch[i].boardId +
+                     '\', \'' +
+                     data
+                     .ajaxSearch[i].projectId +
+                     '\')">';
+                  str +=
+                     '<td>' +
+                     (i + 1) + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].boardTitle + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].boardDateFmt + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].adminNick + '</td>';
+                  str +=
+                     '<td onclick="event.cancelBubble=true;"><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
+                  str +=
+                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="boardUpdate(\'/admin/boardUpdate\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\',\'' +
+                     data.ajaxSearch[i].boardId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
+                  str +=
+                     '<a class="dropdown-item" href="javascript:void(0);" onclick="boardDelete(' + data
+                     .ajaxSearch[i].boardId +
+                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
+                  str += '</tr>'
+               }
+               // console.log("str = " + str)
+               $("#tbody2").append(str);
+            } else {
+               var none = '<tr> <td colspan="8"> 데이터가 존재하지 않습니다. </td> </tr>'
+               $("#tbody2").empty();
+               $("#tbody2").append(none);
+            }
+         },
+         error: function (e) {
+            console.log('error:' + e.status);
+         }
+      });
+
    })
+
+   //프로젝트삭제
+   var projectFormformObj = $("form[name='udtForm']");
+
+   function projectDelete(projectId) {
+      if (confirm("삭제하시겠습니까?") == true) {
+         $('input[name=projectId]').attr('value', projectId);
+         // projectFormformObj.attr("method", "get");
+         projectFormformObj.attr("action", "/admin/projectDelete/project");
+         alert("삭제되었습니다.")
+         projectFormformObj.submit();
+      } else {
+         return;
+      }
+   }
 
    //클라이언트 삭제
    var clientFormformObj = $("form[name='clientForm']");
@@ -382,6 +507,20 @@
          historyFormformObj.attr("method", "get");
          historyFormformObj.attr("action", "/admin/projectDelete/history");
          historyFormformObj.submit();
+      } else {
+         return;
+      }
+   }
+
+   //관련자료 삭제
+   var boardFormformObj = $("form[name='boardForm']");
+
+   function boardDelete(boardId) {
+      if (confirm("삭제하시겠습니까?") == true) {
+         $('input[name=boardId]').attr('value', boardId);
+         boardFormformObj.attr("method", "get");
+         boardFormformObj.attr("action", "/admin/projectDelete/board");
+         boardFormformObj.submit();
       } else {
          return;
       }
@@ -419,6 +558,22 @@
    //히스토리 수정 팝업
    function historyUpdate(theURL, winName, features, history) {
       theURL += '?historyId=' + history;
+      window.open(theURL, winName, features);
+   }
+
+   //관련자료 상세보기 팝업
+   function boardView(theURL, winName, features, board, projectId) {
+      theURL += '?boardId=' + board + '&projectId=' + projectId;
+      window.open(theURL, winName, features);
+   }
+   //관련자료 등록 팝업
+   function boardInsert(theURL, winName, features, projectId) {
+      theURL += '?projectId=' + projectId;
+      window.open(theURL, winName, features);
+   }
+   //관련자료 수정 팝업
+   function boardUpdate(theURL, winName, features, board) {
+      theURL += '?boardId=' + board;
       window.open(theURL, winName, features);
    }
 </script>

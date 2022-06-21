@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     try {
         const param = req.query.calendarId;
         // console.log(param)
-        const sql1 = "select title, calendarDiv, date_format(start, '%Y-%m-%d') as start,\
+        const sql1 = "select *, date_format(start, '%Y-%m-%d') as start,\
                              date_format(date_add(end, interval 1 second), '%Y-%m-%d') as end\
                         from calendar where calendarId = ?;";
         connection.query(sql1, param, (err, results) => {

@@ -6,6 +6,7 @@ var connection = require('../../../config/db').conn;
 router.get('/', async (req, res) => {
     try {
         var searchText = req.query.searchText == undefined ? "" : req.query.searchText;
+        var projectId = req.query.projectId == undefined ? "" : req.query.projectId;
         var boardName = req.query.boardName;
         const page = req.query.page;
         const param = req.query.boardId;
@@ -32,6 +33,7 @@ router.get('/', async (req, res) => {
                 searchText: searchText,
                 boardName: boardName,
                 boardDivId: boardDivId,
+                projectId: projectId,
                 adminNick: adminNick
             });
         });

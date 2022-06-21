@@ -53,11 +53,13 @@ var upload = multer({ //multer안에 storage정보
 //게시글 등록 폼 이동
 router.get('/', async (req, res) => {
     let route = req.app.get('views') + '/ejs/admin/board/brd_writForm.ejs';
-    var boardDivId = req.query.boardDivId;
-    var boardName = req.query.boardName;
+    var boardDivId = req.query.boardDivId == undefined ? '' : req.query.boardDivId;
+    var boardName = req.query.boardName == undefined ? '' : req.query.boardName;
+    var projectId = req.query.projectId == undefined ? null : req.query.projectId;
     res.render(route, {
         boardDivId: boardDivId,
-        boardName: boardName
+        boardName: boardName,
+        projectId: projectId
     });
 });
 
@@ -68,16 +70,17 @@ router.post('/', upload.array('file'), async (req, res, next) => {
         const paths = req.files.map(data => data.path);
         const orgName = req.files.map(data => data.originalname);
         const boardDivId = req.body.boardDivId;
+        const projectId = req.body.projectId;
         const adminNick = req.session.user.id;
-        const sql = "call insertBoard(?,?,?,?,?);\
-                    select max(boardId) as boardId from board;";
+        let sql;
+        let param;
 
         for (let i = 0; i < paths.length; i++) {
             if (req.files[i].mimetype == "image/jpeg" || req.files[i].mimetype == "image/jpg" || req.files[i].mimetype == "image/png") {
                 if (req.files[i].size > 1000000) {
                     sharp(paths[i]).resize({
-                        width: 2000
-                    }).withMetadata() //이미지 방향 유지
+                            width: 2000
+                        }).withMetadata() //이미지 방향 유지
                         .toBuffer((err, buffer) => {
                             if (err) {
                                 throw err;
@@ -98,24 +101,37 @@ router.post('/', upload.array('file'), async (req, res, next) => {
                 throw err;
             }
             const adminId = result[0].adminId;
-            const param = [boardDivId, req.body.boardTitle, req.body.boardContent, adminId, boardFix];
-        connection.query(sql, param, (err, results) => {
-            if (err) {
-                throw err;
+            if (boardDivId != '') {
+                sql = "call insertBoard(?,?,?,?,?);\
+                    select max(boardId) as boardId from board;";
+                param = [boardDivId, req.body.boardTitle, req.body.boardContent, adminId, boardFix];
+            } else {
+                sql = "insert into board(boardTitle, boardContent, adminId, projectId) values(?, ?, ?, ?);\
+                       select max(boardId) as boardId from board;"
+                param = [req.body.boardTitle, req.body.boardContent, adminId, projectId]
             }
-            const boardId = results[1][0].boardId; 
-            for (let i = 0; i < paths.length; i++) {
-                const param2 = [boardId, paths[i], orgName[i], path.extname(paths[i])];
-                const sql2 = "insert into file(boardId, fileRoute, fileOrgName, fileType) values (?, ?, ?, ?)";
-                connection.query(sql2, param2, (err) => {
-                    if (err) {
-                        throw err;
-                    }
-                });
-            };
+
+            connection.query(sql, param, (err, results) => {
+                if (err) {
+                    throw err;
+                }
+                const boardId = results[1][0].boardId;
+                for (let i = 0; i < paths.length; i++) {
+                    const param2 = [boardId, paths[i], orgName[i], path.extname(paths[i])];
+                    const sql2 = "insert into file(boardId, fileRoute, fileOrgName, fileType) values (?, ?, ?, ?)";
+                    connection.query(sql2, param2, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                    });
+                };
+            });
         });
-        });
-        res.send('<script>alert("공지사항이 등록되었습니다."); location.href="/admin/boardMain?boardDivId='+boardDivId+'&page=1";</script>');
+        if (boardDivId != '') {
+            res.send('<script>alert("공지사항이 등록되었습니다."); location.href="/admin/boardMain?boardDivId=' + boardDivId + '&page=1";</script>');
+        } else {
+            res.send('<script>alert("등록이 완료되었습니다."); opener.parent.location.reload(); window.close(); </script>');
+        }
     } catch (error) {
         res.send(error.message);
     }

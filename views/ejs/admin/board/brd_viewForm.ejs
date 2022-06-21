@@ -1,20 +1,24 @@
 <style>
-   *{
+   * {
       font-size: large;
       font-weight: bolder;
-      color : black
+      color: black
    }
-   .form-label, .col-form-label{
+
+   .form-label,
+   .col-form-label {
       font-size: large;
       font-weight: bolder;
-      color : black
+      color: black
    }
-   .form-control{
+
+   .form-control {
       font-size: large;
       font-weight: bolder;
-      color : black
+      color: black
    }
-   #cmtContent{
+
+   #cmtContent {
       font-weight: 400;
    }
 </style>
@@ -29,6 +33,7 @@
             <input type="hidden" id="boardDivId" name="boardDivId" value="<%=result[0].boardDivId%>">
             <input type="hidden" id="boardId" name="boardId" value="<%=result[0].boardId%>">
             <input type="hidden" id="boardName" name="boardName" value="<%=boardName%>">
+            <input type="hidden" id="projectId" name="projectId" value="<%=projectId%>">
             <!-- 컨텐츠 -->
             <div class="mb-3 row">
                <label class="col-md-2 col-form-label" for="text-input">글번호</label>
@@ -42,6 +47,13 @@
                <div class="col-md-9">
                   <input class="form-control" id="boardTitle" type="text" name="boardTitle" disabled="disabled"
                      value="<%=result[0].boardTitle%>">
+               </div>
+            </div>
+            <div class="mb-3 row">
+               <label class="col-md-2 col-form-label" for="text-input">작성자</label>
+               <div class="col-md-9">
+                  <input class="form-control" id="adminNick" type="text" name="adminNick" disabled="disabled"
+                     value="<%=result[0].adminNick%>">
                </div>
             </div>
             <div class="mb-3 row">
@@ -77,11 +89,11 @@
                               type="button" download>파일 다운로드</a>
                         </p>
                         <%} else{%>
-                           <p><%= result[i].fileOrgName %>
+                        <p><%= result[i].fileOrgName %>
                            <a href="../../../<%= result[i].fileRoute %>" class="btn btn-block btn-outline-success"
                               type="button" download>파일 다운로드</a>
                         </p>
-                           <%}%>
+                        <%}%>
                         <input type="hidden" name="fileRoute" value="<%=result[i].fileRoute%>">
                      </div>
                      <% } %>
@@ -97,66 +109,78 @@
             </div>
          </form>
          <br><br>
-            <form action="" id="cmtWrite" method="post" autocomplete="off" name="cmtForm">
+         <% if(projectId == '') {%>
+         <form action="" id="cmtWrite" method="post" autocomplete="off" name="cmtForm">
             <input type="hidden" id="boardId" name="boardId" value="<%=result[0].boardId%>">
             <input type="hidden" id="boardId" name="adminNick" value="<%=adminNick%>">
-                           <div class="mb-3 row">
-                              <label class="col-md-2 col-form-label" for="text-input">댓글</label>
-                              <div class="col-md-8">
-                                 <textarea class="form-control" id="writTitle" type="text" name="cmtContent" value="" rows="4" style="resize: none;" maxlength="300" placeholder="댓글을 입력하시오.. (최대 300자까지 입력가능)"></textarea>
-                              </div>
-                              <div class="col-md-1">
-                                 <button type="button" class="btn btn-primary" id="cmtInsert">입력</button>
-                                 <br><br>
-                                 <div id="test_cnt">(0 / 300)</div>
-                              </div>
-                           </div>
-            </form>
-                           <div class="mb-3 row">
-                              <% for(var i = 0; i < cmtResult.length; i++) {%>
-                              <div class="col-md-2"></div>
-                              <div class="col-md-8" style="border : black 1px solid; margin-top: 20px; margin-bottom: 20px"></div>
-                              <div class="col-md-2"></div>
-                              
-                              <div class="col-md-2"></div>
-                              <div class="col-md-1" style="margin-bottom:10px"><%=cmtResult[i].adminNick%></div>
-                              <div class="col-md-9"><%=cmtResult[i].cmtDateFmt%></div>
+            <div class="mb-3 row">
+               <label class="col-md-2 col-form-label" for="text-input">댓글</label>
+               <div class="col-md-8">
+                  <textarea class="form-control" id="writTitle" type="text" name="cmtContent" value="" rows="4"
+                     style="resize: none;" maxlength="300" placeholder="댓글을 입력하시오.. (최대 300자까지 입력가능)"></textarea>
+               </div>
+               <div class="col-md-1">
+                  <button type="button" class="btn btn-primary" id="cmtInsert">입력</button>
+                  <br><br>
+                  <div id="test_cnt">(0 / 300)</div>
+               </div>
+            </div>
+         </form>
+         <%}%>
+         <div class="mb-3 row">
+            <% for(var i = 0; i < cmtResult.length; i++) {%>
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="border : black 1px solid; margin-top: 20px; margin-bottom: 20px"></div>
+            <div class="col-md-2"></div>
 
-                              <div class="col-md-2"></div>
-                              <div class="col-md-8" id="cmtContent">
-                                <%-cmtResult[i].cmtContent%></div>
-                              <% if(cmtResult[i].adminNick == adminNick){ %>
-                                 <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="cmtDelete(this.value)" value="<%=cmtResult[i].cmtId%>"> 삭제 </button> </div>          
-                                 <!-- onclick="location.href='/admin/boardMain?boardDivId=<%=result[0].boardDivId%>&page=<%=page%>&searchText=<%=searchText%>'" -->
-                              <%}else{%>    
-                                 <div class="col-md-2"></div>
-                                 <%}%>
+            <div class="col-md-2"></div>
+            <div class="col-md-1" style="margin-bottom:10px"><%=cmtResult[i].adminNick%></div>
+            <div class="col-md-9"><%=cmtResult[i].cmtDateFmt%></div>
+
+            <div class="col-md-2"></div>
+            <div class="col-md-8" id="cmtContent">
+               <%-cmtResult[i].cmtContent%></div>
+            <% if(cmtResult[i].adminNick == adminNick){ %>
+            <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="cmtDelete(this.value)"
+                  value="<%=cmtResult[i].cmtId%>"> 삭제 </button> </div>
+            <!-- onclick="location.href='/admin/boardMain?boardDivId=<%=result[0].boardDivId%>&page=<%=page%>&searchText=<%=searchText%>'" -->
+            <%}else{%>
+            <div class="col-md-2"></div>
+            <%}%>
                               <%}%>
-                           </div>
-           
-            <!--option 버튼  -->
-            <div class="demo-inline-spacing">
-               <% if(result[0].adminNick == adminNick) { %>
-               <button type="button" class="btn btn-primary" id="update_btn">수정</button>
-               <button type="button" class="btn btn-danger" id="delete_btn">삭제</button>
-               <%}%>
+         </div>
+         <!--option 버튼  -->
+         <% if(projectId == ''){ %>
+         <div class="demo-inline-spacing">
+            <% if(result[0].adminNick == adminNick) { %>
+            <button type="button" class="btn btn-primary" id="update_btn">수정</button>
+            <button type="button" class="btn btn-danger" id="delete_btn">삭제</button>
+            <%}%>
                <button type="button" class="btn btn-dark"
                   onclick="location.href='/admin/boardMain?boardDivId=<%=result[0].boardDivId%>&page=<%=page%>&searchText=<%=searchText%>'">목록</button>
-            </div>
+         </div>
+         <%}%>
       </div>
    </div>
 </div>
 <script type="text/javascript">
    $(document).ready(function () {
+      const projectId = $('#projectId').val();
+      if (projectId != '') {
+         const nav = document.getElementById('layout-navbar');
+         const footer = document.getElementById('footer')
+         nav.style.display = 'none';
+         footer.style.display = 'none';
+      }
 
-    $('#writTitle').on('keyup', function() {
-        $('#test_cnt').html("("+$(this).val().length+" / 300)");
- 
-        if($(this).val().length > 300) {
+      $('#writTitle').on('keyup', function () {
+         $('#test_cnt').html("(" + $(this).val().length + " / 300)");
+
+         if ($(this).val().length > 300) {
             $(this).val($(this).val().substring(0, 300));
             $('#test_cnt').html("(300 / 300)");
-        }
-    });
+         }
+      });
 
 
 
@@ -194,17 +218,15 @@
             return;
          }
       });
-      
+
    })
-   
+
    // 댓글 삭제
-   function cmtDelete(e){
-         if (confirm("댓글을 삭제하시겠습니까?") == true) {
-            location.href = '/admin/cmtDelete?cmtId='+ e ;
-         } else {
-            return;
-         }
+   function cmtDelete(e) {
+      if (confirm("댓글을 삭제하시겠습니까?") == true) {
+         location.href = '/admin/cmtDelete?cmtId=' + e;
+      } else {
+         return;
+      }
    }
-
-
 </script>

@@ -23,11 +23,16 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><%=results[i].projectName %></h5>
+            <h5 class="card-title"><strong><%=results[i].projectName %></strong></h5>
             <p class="card-text">
-              <%=results[i].projectContent %>
+              발주처 : <%=results[i].projectClient %>
             </p>
-            <p class="card-text"><small class="text-muted"> <%=results[i].projectDomain %></small></p>
+            <p class="card-text">
+              담당자 : <%=results[i].projectManager %>
+            </p>
+            <p class="card-text">
+              도메인 : <%=results[i].projectDomain %>
+            </p>
           </div>
         </div>
       </div>
@@ -40,11 +45,16 @@
         style="cursor:pointer">
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><%=results[i+1].projectName %></h5>
+            <h5 class="card-title"><strong><%=results[i+1].projectName %></strong></h5>
             <p class="card-text">
-              <%=results[i+1].projectContent %>
+              발주처 : <%=results[i+1].projectClient %>
             </p>
-            <p class="card-text"><small class="text-muted"><%=results[i+1].projectContent %></small></p>
+            <p class="card-text">
+              담당자 : <%=results[i+1].projectManager %>
+            </p>
+            <p class="card-text">
+              도메인 : <%=results[i+1].projectDomain %>
+            </p>
           </div>
         </div>
         <div class="col-md-4">
@@ -70,11 +80,16 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%=results[i-1].projectName %></h5>
+                <h5 class="card-title"><strong><%=results[i-1].projectName %></strong></h5>
                 <p class="card-text">
-                  <%=results[i-1].projectContent %>
+                  발주처 : <%=results[i-1].projectClient %>
                 </p>
-                <p class="card-text"><small class="text-muted"> <%=results[i-1].projectDomain %></small></p>
+                <p class="card-text">
+                  담당자 : <%=results[i-1].projectManager %>
+                </p>
+                <p class="card-text">
+                  도메인 : <%=results[i-1].projectDomain %>
+                </p>
               </div>
             </div>
           </div>
@@ -88,11 +103,16 @@
             style="cursor:pointer">
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%=results[i].projectName %></h5>
+                <h5 class="card-title"><strong><%=results[i].projectName %></strong></h5>
                 <p class="card-text">
-                  <%=results[i].projectContent %>
+                  발주처 : <%=results[i].projectClient %>
                 </p>
-                <p class="card-text"><small class="text-muted"><%=results[i].projectContent %></small></p>
+                <p class="card-text">
+                  담당자 : <%=results[i].projectManager %>
+                </p>
+                <p class="card-text">
+                  도메인 : <%=results[i].projectDomain %>
+                </p>
               </div>
             </div>
             <div class="col-md-4">
@@ -116,11 +136,16 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%=results[results.length-1].projectName %></h5>
+                <h5 class="card-title"><strong><%=results[results.length-1].projectName %></strong></h5>
                 <p class="card-text">
-                  <%=results[results.length-1].projectContent %>
+                  발주처 : <%=results[results.length-1].projectClient %>
                 </p>
-                <p class="card-text"><small class="text-muted"> <%=results[results.length-1].projectDomain %></small></p>
+                <p class="card-text">
+                  담당자 : <%=results[results.length-1].projectManager %>
+                </p>
+                <p class="card-text">
+                  도메인 : <%=results[results.length-1].projectDomain %>
+                </p>
               </div>
             </div>
           </div>

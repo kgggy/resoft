@@ -8,8 +8,8 @@ router.post('/', async (req, res) => {
     try {
         // console.log(req.body.obj)
         const data = req.body.obj;
-        const sql = "update calendar set title = ?, start = ?, end = ?, calendarDiv = ? where calendarId = ?";
-        const param = [data.title, data.start, data.end, data.div, data.calendarId];
+        const sql = "update calendar set title = ?, start = ?, end = ?, subDiv = ? where calendarId = ?";
+        const param = [data.title, data.start, data.end, data.subDiv, data.calendarId];
         // console.log(data.start)
         connection.query(sql, param, (err) => {
             if (err) {
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-//일정 날짜만 수정
+//일정 날짜 이동
 router.get('/date', async (req, res) => {
     const start = moment(req.query.start);
     const end = moment(req.query.end);

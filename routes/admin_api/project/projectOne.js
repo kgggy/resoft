@@ -25,9 +25,8 @@ router.get('/test', async (req, res) => {
                 }
                 client = result;
                 let route = req.app.get('views') + '/ejs/admin/project/project_viewForm.ejs';
-                console.log(project[0].projectName)
-                console.log(client[0].clientName)
-                console.log
+                // console.log(project[0].projectName)
+                // console.log(client[0].clientName)
                 // res.send('<script> alert="aa"; location.href="/admin/projectOne/view"</script>', {
                 //     project: project,
                 //     client: client
@@ -86,7 +85,28 @@ router.get('/history', async (req, res) => {
     const param = req.query.projectId
     try {
         var clientSql = "select *, date_format(historyReqDate, '%Y-%m-%d %H:%i') as historyReqDateFmt\
-                           from history where projectId = ?"
+                           from history where projectId = ? order by historyReqDate desc"
+        connection.query(clientSql, param, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            res.send({
+                ajaxSearch: result
+            });
+        });
+    } catch (error) {
+        res.status(401).send(error.message);
+    }
+});
+
+//관련 자료 및 참고사항 ajax
+router.get('/board', async (req, res) => {
+    const param = req.query.projectId
+    try {
+        var clientSql = "select b.*, a.adminNick, date_format(boardDate, '%Y-%m-%d') as boardDateFmt\
+                           from board b\
+                      left join admin a on a.adminId = b.adminId\
+                          where projectId = ? order by boardDate desc"
         connection.query(clientSql, param, function (err, result) {
             if (err) {
                 console.log(err);
@@ -121,6 +141,10 @@ router.get('/', async (req, res) => {
             //         console.log(err);
             //     }
             //     client = result;
+            console.log(result[0].projectContent==null||result[0].projectContent=='')
+            console.log(result[0].projectContent==null)
+            console.log(result[0].projectContent==' ')
+            console.log(result[0].projectContent)
             let route = req.app.get('views') + '/ejs/admin/project/project_viewForm.ejs';
             res.render(route, {
                 result: result
@@ -133,6 +157,27 @@ router.get('/', async (req, res) => {
 });
 
 //히스토리 상세보기
+router.get('/historyOne', async (req, res) => {
+    var sql = "SELECT *, date_format(historyReqDate, '%Y-%m-%dT%H:%i') as historyReqDateFmt,\
+                      date_format(historyDoneDate, '%Y-%m-%dT%H:%i') as historyDoneDateFmt\
+                 FROM history where historyId = ?;";
+    const param = req.query.historyId;
+    try {
+        connection.query(sql, param, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            let route = req.app.get('views') + '/ejs/admin/project/history/history_viewForm.ejs';
+            res.render(route, {
+                result: result
+            });
+        });
+    } catch (error) {
+        res.status(401).send(error.message);
+    }
+});
+
+//관련 자료 및 참고사항 상세보기
 router.get('/historyOne', async (req, res) => {
     var sql = "SELECT *, date_format(historyReqDate, '%Y-%m-%dT%H:%i') as historyReqDateFmt,\
                       date_format(historyDoneDate, '%Y-%m-%dT%H:%i') as historyDoneDateFmt\

@@ -24,12 +24,6 @@ const calendarInsert = require('./calendar/calendarInsert.js');
 const calendarUpdate = require('./calendar/calendarUpdate.js');
 const calendarDelete = require('./calendar/calendarDelete.js');
 
-const pjCalendarSelect = require('./projectCalendar/calendarSelect.js');
-const pjCalendarSelectOne = require('./projectCalendar/calendarSelectOne.js');
-const pjCalendarInsert = require('./projectCalendar/calendarInsert.js');
-const pjCalendarUpdate = require('./projectCalendar/calendarUpdate.js');
-const pjCalendarDelete = require('./projectCalendar/calendarDelete.js');
-
 const project = require('./project/project.js');
 const projectOne = require('./project/projectOne.js');
 const projectInsert = require('./project/projectInsert.js');
@@ -92,13 +86,6 @@ router.use('/calendarSelectOne', calendarSelectOne);
 router.use('/calendarInsert', calendarInsert);
 router.use('/calendarUpdate', calendarUpdate);
 router.use('/calendarDelete', calendarDelete);
-
-
-router.use('/pjCalendarSelect', pjCalendarSelect);
-router.use('/pjCalendarSelectOne', pjCalendarSelectOne);
-router.use('/pjCalendarInsert', pjCalendarInsert);
-router.use('/pjCalendarUpdate', pjCalendarUpdate);
-router.use('/pjCalendarDelete', pjCalendarDelete);
 
 router.use('/project', project);
 router.use('/projectOne', projectOne);
