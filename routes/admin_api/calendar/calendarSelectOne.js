@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
             }
             // console.log(results)
             res.send({
-                results
+                results: results, adminNick: req.session.user.id
             });
         });
     } catch (error) {

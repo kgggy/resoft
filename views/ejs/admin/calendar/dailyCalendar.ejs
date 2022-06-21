@@ -14,6 +14,22 @@
     type="text/javascript"></script>
 
 <style>
+    .modal-footer-writ {
+        display: flex;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 1.25rem;
+        border-top: 0px solid #d9dee3;
+        border-bottom-right-radius: calc(0.5rem - 0px);
+        border-bottom-left-radius: calc(0.5rem - 0px);
+
+    }
+    .modal-footer-writ>* {
+        margin: 0.25rem;
+    }
+
     #calendar {
         max-width: 1100px;
         margin: 0 auto;
@@ -212,7 +228,7 @@
 
 <script type="text/javascript">
     var eventColor = '#fbdeea'; //빨
-    var workColor = '#fcdfd8';  //주
+    var workColor = '#fcdfd8'; //주
     var annualColor = '#feefdb'; //노
     var approvalColor = '#e1f0d8'; //초
     var otherColor = '#c7effc'; //파
@@ -303,17 +319,17 @@
                     color: approvalColor
                 };
                 Object.assign(origin, color, allDay, textBlack);
-            }else if (events[i].writer == '서보경') {
+            } else if (events[i].writer == '서보경') {
                 color = {
                     color: otherColor
                 };
                 Object.assign(origin, color, allDay, textBlack);
-            }else if (events[i].writer == '정의영') {
+            } else if (events[i].writer == '정의영') {
                 color = {
                     color: rejectColor
                 };
                 Object.assign(origin, color, allDay, textBlack);
-            }else if (events[i].writer == 'admin') {
+            } else if (events[i].writer == 'admin') {
                 color = {
                     color: adminColor
                 };
@@ -333,12 +349,12 @@
                 //해당 날짜
                 $("#calendar_start_date").attr('value', info.dateStr);
                 $("#calendar_end_date").attr('value', info.dateStr);
-                console.log(info.dateStr)
+                // console.log(info.dateStr)
                 $("#addDaily").on("click", function () { // modal의 추가 버튼 클릭 시
                     var content = $("#dailyContent").val();
                     var start_date = $("#calendar_start_date").val();
                     var end_date = $("#calendar_end_date").val();
-                    console.log(start_date)
+                    // console.log(start_date)
                     //내용 입력 여부 확인
                     if (content == null || content == "") {
                         alert("내용을 입력하세요.");
@@ -355,6 +371,7 @@
                         $.ajax({
                             type: 'post',
                             url: '/admin/calendarInsert',
+                            async: false,
                             data: {
                                 obj: obj
                             },
@@ -382,7 +399,21 @@
                     },
                     dataType: 'json',
                     success: function (info) {
-                        console.log(info.results[0].writer)
+                        var str = "";
+                        $(".modal-footer").empty();
+                        if (info.adminNick == info.results[0].writer) {
+                            str +=
+                                '<button type="button" class="btn btn-warning" id="udtDailyCalendar">수정</button>';
+                            str +=
+                                '<button type="button" class="btn btn-danger" id="deleteDailyCalendar">삭제</button>';
+                            str +=
+                                '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="sprintSettingModalClose">취소</button>';
+                        } else {
+                            str +=
+                                '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="sprintSettingModalClose">취소</button>';
+                        }
+                        $(".modal-footer").append(str);
+                        // console.log(info.results[0].writer)
                         $("#udtDailyCalendarModal").modal("show");
                         $("#udtcalendar_content").val(info.results[0].title)
                         $("#udtcalendar_start_date").attr('value', info.results[0]
@@ -412,6 +443,7 @@
                                         $.ajax({
                                             type: 'post',
                                             url: '/admin/calendarUpdate',
+                                            async: false,
                                             data: {
                                                 obj: obj
                                             },
@@ -439,6 +471,7 @@
                                     $.ajax({
                                         type: 'get',
                                         url: '/admin/calendarDelete',
+                                        async: false,
                                         data: {
                                             calendarId: id
                                         },
@@ -493,12 +526,12 @@
                 <input type="hidden" id="calendar_end_date" value="">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="taskId" class="col-form-label">일정 내용</label>
+                        <label for="taskId" class="col-form-label">보고서 내용</label>
                         <textarea maxlength="500" id="dailyContent" placeholder="500자까지 입력 가능합니다."></textarea>
                     </div>
                 </div>
             </form>
-            <div class="modal-footer">
+            <div class="modal-footer-writ">
                 <button type="button" class="btn btn-warning" id="addDaily">추가</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     id="sprintSettingModalClose">취소</button>
@@ -524,17 +557,16 @@
                 <input type="hidden" id="udtcalendar_end_date" value="">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="taskId" class="col-form-label">일정 내용</label>
+                        <label for="taskId" class="col-form-label">보고서 내용</label>
                         <textarea maxlength="500" id="udtcalendar_content" placeholder="500자까지 입력 가능합니다."></textarea>
                     </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="udtDailyCalendar">수정</button>
-                <button type="button" class="btn btn-danger" id="deleteDailyCalendar">삭제</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    id="sprintSettingModalClose">취소</button>
+                <!-- <button type="button" class="btn btn-warning" id="udtDailyCalendar">수정</button>
+                <button type="button" class="btn btn-danger" id="deleteDailyCalendar">삭제</button> -->
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    id="sprintSettingModalClose">취소</button> -->
             </div>
-
         </div>
     </div>
 </div>
