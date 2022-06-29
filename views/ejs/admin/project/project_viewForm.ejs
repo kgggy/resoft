@@ -73,6 +73,16 @@
       display: flex;
       align-items: flex-end;
    }
+
+   .card-body {
+      display: grid;
+   }
+
+   .btn-outline-primary {
+      margin: 25px 0 20px 0;
+      border-color: #b5b8bd;
+      color: #78797a;
+   }
 </style>
 <div class="col-xs-6">
    <!-- <div class="mb-3 row">
@@ -202,11 +212,11 @@
             <i class='bx bxs-plus-circle bx-rotate-180' style='color:#696cff; font-size: 30px;'></i></a>
       </div>
       <div class="card-body">
-         <form name="clientForm" role="form">
+         <form class="moreForm" name="clientForm" role="form">
             <input type="hidden" id="projectId" name="projectId" value="<%=result[0].projectId%>" />
             <input type="hidden" name="clientId" value="" />
             <div class="table-responsive text-nowrap">
-               <table class="table table-hove" style="height: 200px">
+               <table id="clientTable" class="table table-hove" style="height: 200px">
                   <thead>
                      <tr>
                         <th>상호</th>
@@ -222,8 +232,10 @@
                   </tbody>
                </table>
             </div>
-
          </form>
+         <button id="clientMore" class="btn btn-outline-primary" onclick="clientMore()">더보기</button>
+         <!-- <input type="hidden" name="lastPage" id="lastPage" value="" />
+         <input type="hidden" name="projectId" id="projectId" value="" /> -->
       </div>
    </div>
    <div class="card mb-4">
@@ -238,7 +250,7 @@
             <input type="hidden" id="projectId" name="projectId" value="<%=result[0].projectId%>" />
             <input type="hidden" name="historyId" value="" />
             <div class="table-responsive text-nowrap">
-               <table class="table table-hove" style="height: 200px">
+               <table id="historyTable" class="table table-hove" style="height: 200px">
                   <thead>
                      <tr>
                         <th>진행상태</th>
@@ -255,6 +267,7 @@
                </table>
             </div>
          </form>
+         <button id="historyMore" class="btn btn-outline-primary" onclick="historyMore()">더보기</button>
       </div>
    </div>
    <div class="card mb-4">
@@ -269,7 +282,7 @@
             <input type="hidden" id="projectId" name="projectId" value="<%=result[0].projectId%>" />
             <input type="hidden" name="boardId" value="" />
             <div class="table-responsive text-nowrap">
-               <table class="table table-hove" style="height: 200px">
+               <table id="boardTable" class="table table-hove" style="height: 200px">
                   <thead>
                      <tr>
                         <th>번호</th>
@@ -285,188 +298,20 @@
                </table>
             </div>
          </form>
+         <button id="boardMore" class="btn btn-outline-primary" onclick="boardMore()">더보기</button>
       </div>
    </div>
 </div>
 
 <script type="text/javascript">
+   var words = $("#projectId").val();
+   var clientLastPage;
+   var historyLastPage;
+   var boardLastPage;
    $(document).ready(function () {
-
-      var words = $("#projectId").val();
-      // console.log(words);
-      //클라이언트
-      $.ajax({
-         type: 'get',
-         url: '/admin/projectOne/client',
-         data: {
-            projectId: words
-         },
-         dataType: 'json',
-         success: function (data) {
-            var str = ''
-            console.log(data)
-            if (data.ajaxSearch.length > 0) {
-               for (var i = 0; i < data.ajaxSearch.length; i++) {
-                  $("#tbody").empty();
-                  str +=
-                     '<tr>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].clientComName + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].clientBelong + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].clientName + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].clientPosition + '</td>';
-                  str +=
-                     '<td>' +
-                     data.clientPhone[i] + '</td>';
-                  str +=
-                     '<td><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
-                  str +=
-                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="clientUpdate(\'/admin/projectUpdate/client\', \'\', \'resizable=no,width=1199, height=250, scrollbars=1\',\'' +
-                     data.ajaxSearch[i].clientId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
-                  str +=
-                     '<a class="dropdown-item" href="javascript:void(0);" onclick="clientDelete(' + data
-                     .ajaxSearch[i].clientId +
-                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
-                  str += '</tr>'
-               }
-               // console.log("str = " + str)
-               $("#tbody").append(str);
-            } else {
-               var none = '<tr> <td colspan="6"> 데이터가 존재하지 않습니다. </td> </tr>'
-               $("#tbody").empty();
-               $("#tbody").append(none);
-            }
-         },
-         error: function (e) {
-            console.log('error:' + e.status);
-         }
-      });
-
-      //히스토리
-      $.ajax({
-         type: 'get',
-         url: '/admin/projectOne/history',
-         data: {
-            projectId: words
-         },
-         dataType: 'json',
-         success: function (data) {
-            var str = ''
-            // console.log(data)
-            if (data.ajaxSearch.length > 0) {
-               for (var i = 0; i < data.ajaxSearch.length; i++) {
-                  $("#tbody1").empty();
-
-                  str +=
-                     '<tr class="pointer" onclick="historyView(\'/admin/projectOne/historyOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
-                     data
-                     .ajaxSearch[i].historyId +
-                     '\')">';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].historyStatus + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].historyReqDateFmt + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].historyRequester + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].historyTitle + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].historyManager + '</td>';
-                  str +=
-                     '<td onclick="event.cancelBubble=true;"><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
-                  str +=
-                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="historyUpdate(\'/admin/projectUpdate/history\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\',\'' +
-                     data.ajaxSearch[i].historyId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
-                  str +=
-                     '<a class="dropdown-item" href="javascript:void(0);" onclick="historyDelete(' + data
-                     .ajaxSearch[i].historyId +
-                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
-                  str += '</tr>'
-               }
-               // console.log("str = " + str)
-               $("#tbody1").append(str);
-            } else {
-               var none = '<tr> <td colspan="8"> 데이터가 존재하지 않습니다. </td> </tr>'
-               $("#tbody1").empty();
-               $("#tbody1").append(none);
-            }
-         },
-         error: function (e) {
-            console.log('error:' + e.status);
-         }
-      });
-
-      //관련 자료 및 참고사항
-      $.ajax({
-         type: 'get',
-         url: '/admin/projectOne/board',
-         data: {
-            projectId: words
-         },
-         dataType: 'json',
-         success: function (data) {
-            var str = ''
-            console.log(data)
-            if (data.ajaxSearch.length > 0) {
-               for (var i = 0; i < data.ajaxSearch.length; i++) {
-                  $("#tbody2").empty();
-
-                  str +=
-                     '<tr class="pointer" onclick="boardView(\'/admin/boardSelectOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
-                     data
-                     .ajaxSearch[i].boardId +
-                     '\', \'' +
-                     data
-                     .ajaxSearch[i].projectId +
-                     '\')">';
-                  str +=
-                     '<td>' +
-                     (i + 1) + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].boardTitle + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].boardDateFmt + '</td>';
-                  str +=
-                     '<td>' +
-                     data.ajaxSearch[i].adminNick + '</td>';
-                  str +=
-                     '<td onclick="event.cancelBubble=true;"><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
-                  str +=
-                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="boardUpdate(\'/admin/boardUpdate\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\',\'' +
-                     data.ajaxSearch[i].boardId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
-                  str +=
-                     '<a class="dropdown-item" href="javascript:void(0);" onclick="boardDelete(' + data
-                     .ajaxSearch[i].boardId +
-                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
-                  str += '</tr>'
-               }
-               // console.log("str = " + str)
-               $("#tbody2").append(str);
-            } else {
-               var none = '<tr> <td colspan="8"> 데이터가 존재하지 않습니다. </td> </tr>'
-               $("#tbody2").empty();
-               $("#tbody2").append(none);
-            }
-         },
-         error: function (e) {
-            console.log('error:' + e.status);
-         }
-      });
-
+      clientMore();
+      historyMore();
+      boardMore();
    })
 
    //프로젝트삭제
@@ -575,5 +420,206 @@
    function boardUpdate(theURL, winName, features, board) {
       theURL += '?boardId=' + board;
       window.open(theURL, winName, features);
+   }
+
+   //클라이언트
+   function clientMore() {
+      // $('input[name=lastPage]').attr('value', lastPage);
+      // $('input[name=projectId]').attr('value', words);
+      $.ajax({
+         type: 'get',
+         url: '/admin/projectOne/client',
+         data: {
+            projectId: words,
+            lastPage: clientLastPage
+         },
+         dataType: 'json',
+         success: function (data) {
+            // console.log(data.ajaxSearch.length == 0)
+            if (data.ajaxSearch.length >= 0 && data.ajaxSearch.length <= 2) {
+               var clientMore = document.getElementById('clientMore');
+               clientMore.disabled = true;
+            }
+            clientLastPage = data.ajaxSearch[data.ajaxSearch.length - 1].clientId;
+            var str = ''
+            // console.log(data)
+            if (data.ajaxSearch.length > 0) {
+               for (var i = 0; i < data.ajaxSearch.length; i++) {
+                  // $("#tbody").empty();
+                  str +=
+                     '<tr>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].clientComName + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].clientBelong + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].clientName + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].clientPosition + '</td>';
+                  str +=
+                     '<td>' +
+                     data.clientPhone[i] + '</td>';
+                  str +=
+                     '<td><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
+                  str +=
+                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="clientUpdate(\'/admin/projectUpdate/client\', \'\', \'resizable=no,width=1199, height=250, scrollbars=1\',\'' +
+                     data.ajaxSearch[i].clientId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
+                  str +=
+                     '<a class="dropdown-item" href="javascript:void(0);" onclick="clientDelete(' + data
+                     .ajaxSearch[i].clientId +
+                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
+                  str += '</tr>'
+               }
+               // console.log("str = " + str)
+               // $("#tbody").append(str);
+               $('#clientTable > tbody:last').append(str)
+            } else {
+               var none = '<tr> <td colspan="6"> 데이터가 존재하지 않습니다. </td> </tr>'
+               $("#tbody").empty();
+               $("#tbody").append(none);
+            }
+         },
+         error: function (e) {
+            console.log('error:' + e.status);
+         }
+      });
+   }
+
+   //히스토리
+   function historyMore() {
+      $.ajax({
+         type: 'get',
+         url: '/admin/projectOne/history',
+         data: {
+            projectId: words,
+            lastPage: historyLastPage
+         },
+         dataType: 'json',
+         success: function (data) {
+            if (data.ajaxSearch.length >= 0 && data.ajaxSearch.length <= 2) {
+               var historyMore = document.getElementById('historyMore');
+               historyMore.disabled = true;
+            }
+            historyLastPage = data.ajaxSearch[data.ajaxSearch.length - 1].historyId;
+            var str = ''
+            // console.log(data)
+            if (data.ajaxSearch.length > 0) {
+               for (var i = 0; i < data.ajaxSearch.length; i++) {
+                  // $("#tbody1").empty();
+                  str +=
+                     '<tr class="pointer" onclick="historyView(\'/admin/projectOne/historyOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
+                     data
+                     .ajaxSearch[i].historyId +
+                     '\')">';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].historyStatus + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].historyReqDateFmt + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].historyRequester + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].historyTitle + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].historyManager + '</td>';
+                  str +=
+                     '<td onclick="event.cancelBubble=true;"><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
+                  str +=
+                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="historyUpdate(\'/admin/projectUpdate/history\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\',\'' +
+                     data.ajaxSearch[i].historyId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
+                  str +=
+                     '<a class="dropdown-item" href="javascript:void(0);" onclick="historyDelete(' + data
+                     .ajaxSearch[i].historyId +
+                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
+                  str += '</tr>'
+               }
+               // console.log("str = " + str)
+               // $("#tbody1").append(str);
+               $('#historyTable > tbody:last').append(str)
+            } else {
+               var none = '<tr> <td colspan="8"> 데이터가 존재하지 않습니다. </td> </tr>'
+               $("#tbody1").empty();
+               $("#tbody1").append(none);
+            }
+         },
+         error: function (e) {
+            console.log('error:' + e.status);
+         }
+      });
+   }
+
+   //관련 자료 및 참고사항
+   function boardMore() {
+      $.ajax({
+         type: 'get',
+         url: '/admin/projectOne/board',
+         data: {
+            projectId: words,
+            lastPage: boardLastPage
+         },
+         dataType: 'json',
+         success: function (data) {
+            if (data.ajaxSearch.length >= 0 && data.ajaxSearch.length <= 2) {
+               var boardMore = document.getElementById('boardMore');
+               boardMore.disabled = true;
+            }
+            boardLastPage = data.ajaxSearch[data.ajaxSearch.length - 1].boardId;
+            var str = ''
+            // console.log(data)
+            if (data.ajaxSearch.length > 0) {
+               for (var i = 0; i < data.ajaxSearch.length; i++) {
+                  // $("#tbody2").empty();
+                  str +=
+                     '<tr class="pointer" onclick="boardView(\'/admin/boardSelectOne\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\', \'' +
+                     data
+                     .ajaxSearch[i].boardId +
+                     '\', \'' +
+                     data
+                     .ajaxSearch[i].projectId +
+                     '\')">';
+                  str +=
+                     '<td>' +
+                     (i + 1) + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].boardTitle + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].boardDateFmt + '</td>';
+                  str +=
+                     '<td>' +
+                     data.ajaxSearch[i].adminNick + '</td>';
+                  str +=
+                     '<td onclick="event.cancelBubble=true;"><div class="dropdown"><button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
+                  str +=
+                     '<div class="dropdown-menu"><a class="dropdown-item" href="javascript:void(0);" onclick="boardUpdate(\'/admin/boardUpdate\', \'\', \'resizable=no,width=780, height=800, scrollbars=1\',\'' +
+                     data.ajaxSearch[i].boardId + '\')"><i class="bx bx-edit-alt me-1"></i> 수정</a>';
+                  str +=
+                     '<a class="dropdown-item" href="javascript:void(0);" onclick="boardDelete(' + data
+                     .ajaxSearch[i].boardId +
+                     ')"><i class="bx bx-trash me-1"></i> 삭제</a></div></div></td>';
+                  str += '</tr>'
+               }
+               // console.log("str = " + str)
+               // $("#tbody2").append(str);
+               $('#boardTable > tbody:last').append(str)
+            } else {
+               var none = '<tr> <td colspan="8"> 데이터가 존재하지 않습니다. </td> </tr>'
+               $("#tbody2").empty();
+               $("#tbody2").append(none);
+            }
+         },
+         error: function (e) {
+            console.log('error:' + e.status);
+         }
+      });
    }
 </script>

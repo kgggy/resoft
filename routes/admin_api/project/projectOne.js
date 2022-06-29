@@ -10,7 +10,7 @@ router.get('/test', async (req, res) => {
     // console.log("adadad")
     const param = req.query.projectId;
     g_projectId = param;
-    console.log(g_projectId)
+    // console.log(g_projectId)
     try {
         let project;
         let client;
@@ -47,10 +47,56 @@ router.get('/test', async (req, res) => {
 });
 
 //클라이언트 ajax
+// router.get('/client', async (req, res) => {
+//     const param = req.query.projectId
+    
+//     try {
+//         var clientSql = "select * from client where projectId = ?"
+//         connection.query(clientSql, param, function (err, result) {
+//             if (err) {
+//                 console.log(err);
+//             }
+//             let phone = [];
+//             let splitphone;
+//             // console.log(clientPhone.length)
+//             for (i = 0; i < result.length; i++) {
+//                 const clientPhone = result[i].clientPhone;
+//                 if (result[i].clientPhone.length == 11) {
+//                     // console.log("휴대번호")
+//                     splitphone = clientPhone.substring(0, 3) + '-' + clientPhone.substring(3, 7) + '-' + clientPhone.substring(7, 11);
+//                 } else {
+//                     // console.log("전화번호")
+//                     splitphone = clientPhone.substring(0, 3) + '-' + clientPhone.substring(3, 6) + '-' + clientPhone.substring(6, 10);
+//                 }
+//                 phone.push(splitphone)
+//             }
+//             // console.log(phone)
+//             res.send({
+//                 ajaxSearch: result,
+//                 clientPhone: phone
+//             });
+//         });
+//     } catch (error) {
+//         res.status(401).send(error.message);
+//     }
+// });
+
+//클라이언트 ajax 페이징 테스트
 router.get('/client', async (req, res) => {
-    const param = req.query.projectId
+    // const param = req.query.projectId
+    // const lastPage = req.query.lastPage
+    // console.log(req.query.lastPage)
+    // console.log(req.query.lastPage == undefined)
     try {
-        var clientSql = "select * from client where projectId = ?"
+        var clientSql;
+        var param;
+        if(req.query.lastPage == undefined) {
+            clientSql = "select * from client where projectId = ?  order by clientId desc limit 3"
+            param = [req.query.projectId];
+        } else {
+            clientSql = "select * from client where projectId = ? and clientId < ? order by clientId desc limit 3"
+            param = [req.query.projectId, req.query.lastPage];
+        }
         connection.query(clientSql, param, function (err, result) {
             if (err) {
                 console.log(err);
@@ -82,10 +128,18 @@ router.get('/client', async (req, res) => {
 
 //히스토리 ajax
 router.get('/history', async (req, res) => {
-    const param = req.query.projectId
     try {
-        var clientSql = "select *, date_format(historyReqDate, '%Y-%m-%d %H:%i') as historyReqDateFmt\
-                           from history where projectId = ? order by historyReqDate desc"
+        var clientSql;
+        var param;
+        if(req.query.lastPage == undefined) {
+            clientSql = "select *, date_format(historyReqDate, '%Y-%m-%d %H:%i') as historyReqDateFmt\
+                           from history where projectId = ? order by field(historyStatus, '대기중', '처리중','보류', '처리완료'), historyId desc limit 3;"
+            param = [req.query.projectId];
+        } else {
+            clientSql = "select *, date_format(historyReqDate, '%Y-%m-%d %H:%i') as historyReqDateFmt\
+                           from history where projectId = ? and historyId < ? order by field(historyStatus, '대기중', '처리중','보류', '처리완료'), historyId desc limit 3;"
+            param = [req.query.projectId, req.query.lastPage];
+        }
         connection.query(clientSql, param, function (err, result) {
             if (err) {
                 console.log(err);
@@ -101,12 +155,22 @@ router.get('/history', async (req, res) => {
 
 //관련 자료 및 참고사항 ajax
 router.get('/board', async (req, res) => {
-    const param = req.query.projectId
     try {
-        var clientSql = "select b.*, a.adminNick, date_format(boardDate, '%Y-%m-%d') as boardDateFmt\
+        var clientSql;
+        var param;
+        if(req.query.lastPage == undefined) {
+            clientSql = "select b.*, a.adminNick, date_format(boardDate, '%Y-%m-%d') as boardDateFmt\
                            from board b\
                       left join admin a on a.adminId = b.adminId\
-                          where projectId = ? order by boardDate desc"
+                          where projectId = ? order by boardId desc limit 3;"
+            param = [req.query.projectId];
+        } else {
+            clientSql = "select b.*, a.adminNick, date_format(boardDate, '%Y-%m-%d') as boardDateFmt\
+                           from board b\
+                      left join admin a on a.adminId = b.adminId\
+                          where projectId = ? and boardId < ? order by boardId desc limit 3;"
+            param = [req.query.projectId, req.query.lastPage];
+        }
         connection.query(clientSql, param, function (err, result) {
             if (err) {
                 console.log(err);
@@ -141,10 +205,10 @@ router.get('/', async (req, res) => {
             //         console.log(err);
             //     }
             //     client = result;
-            console.log(result[0].projectContent==null||result[0].projectContent=='')
-            console.log(result[0].projectContent==null)
-            console.log(result[0].projectContent==' ')
-            console.log(result[0].projectContent)
+            // console.log(result[0].projectContent==null||result[0].projectContent=='')
+            // console.log(result[0].projectContent==null)
+            // console.log(result[0].projectContent==' ')
+            // console.log(result[0].projectContent)
             let route = req.app.get('views') + '/ejs/admin/project/project_viewForm.ejs';
             res.render(route, {
                 result: result
