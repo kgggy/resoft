@@ -19,18 +19,17 @@
 ```
  - 게시판 CRUD기능 구현
  - 페이징 처리
- - 캘린더
- - 로그인
+ - fullCalendar 라이브러리 이용한 스케쥴 관리 달력 구현
 ```
 
 |개발환경||
 |---|---|
-|개발언어|Spring, BootStrap4, HTML5, Javascript, Jquery, Ajax, CSS, Mybatis|
-|데이터베이스|Oracle Database|
-|서버|TOMCAT 9.0|
-|IDE|Eclipse, SQL Developer|
-|빌드 배포|Maven|
+|개발언어|Node.js, Express, BootStrap5, ejs, Javascript, Jquery, Ajax, CSS|
+|데이터베이스|MySQL|
+|서버|Nginx|
+|IDE|Visual Studio code, MySQL Workbench|
 |형상관리|Github|
+
 
 
 
